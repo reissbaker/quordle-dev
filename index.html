@@ -62,10 +62,11 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      if (window.Sentry) {
+      if (window.Sentry && window.location.host.indexOf("quordle.com") >= 0) {
         Sentry.onLoad(function() {
           Sentry.init({
-            dsn: "https://cd8139814dd64a07af2a72fe40bed481@o1140342.ingest.sentry.io/6197424"
+            dsn: "https://cd8139814dd64a07af2a72fe40bed481@o1140342.ingest.sentry.io/6197424",
+            environment: window.location.host.indexOf("dev.") >= 0 ? "dev" : "production"
           });
         });
       }
