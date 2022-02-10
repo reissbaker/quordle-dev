@@ -27,7 +27,7 @@ const Header: Component<HeaderProps> = (props) => {
               class="quordle-nav"
               end
             >
-              Daily #{dailySeed}
+              Daily #{dailySeed()}
             </NavLink>
             <NavLink
               href="/practice"
