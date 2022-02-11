@@ -87,12 +87,11 @@ const Key: Component<KeyProps> = (props) => {
 
   return (
     <button
-      class="quordle-box quordle-key w-[10%]"
+      class="quordle-key w-[10%]"
       classList={{
-        "border-l-[1px]": props.x === 0,
-        "border-t-[1px]": props.y === 0,
-        "border-b-transparent": props.key === "enter3",
-        "border-r-transparent": props.key === "enter1",
+        "quordle-enter-top": props.key === "enter3",
+        "quordle-enter": props.key === "enter2",
+        "quordle-enter-left": props.key === "enter1",
       }}
       style={keyStyle()}
       onClick={() => {
@@ -135,7 +134,7 @@ type KeyboardProps = {
 };
 const Keyboard: Component<KeyboardProps> = (props) => {
   return (
-    <div class="w-full flex-col">
+    <div class="w-full flex-col quordle-keyboard">
       {KEYBOARD_KEYS.map((row, y) => (
         <div class="flex w-full">
           {row.map((key, x) => (
