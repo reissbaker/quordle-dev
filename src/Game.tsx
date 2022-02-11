@@ -109,7 +109,7 @@ const Game: Component<GameProps> = (props) => {
         )}
       </div>
       <div
-        class="quordle-board-group max-w-[550px] m-auto w-full flex-auto"
+        class="quordle-desktop-scrollbar max-w-[550px] m-auto w-full flex-auto"
         classList={{
           "overflow-hidden": tutorialOpen() || statisticsOpen(),
           "overflow-auto": !(tutorialOpen() || statisticsOpen()),
