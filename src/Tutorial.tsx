@@ -89,7 +89,7 @@ const Tutorial: Component<TutorialProps> = (props) => {
           that you are solving. All four words you are solving will be
           different.
         </div>
-        <div class="flex w-[100%] mb-1">
+        <div class="flex w-[100%] mb-2">
           <div class="flex w-[50%] mr-1">
             <TutorialWord word={TUTORIAL_WORDS[3]} />
           </div>
@@ -97,7 +97,7 @@ const Tutorial: Component<TutorialProps> = (props) => {
             <TutorialWord word={TUTORIAL_WORDS[4]} />
           </div>
         </div>
-        <div class="flex w-[100%] mt-1 mb-2">
+        <div class="flex w-[100%] mt-2 mb-2">
           <div class="flex w-[50%] mr-1">
             <TutorialWord word={TUTORIAL_WORDS[5]} />
           </div>
