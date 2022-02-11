@@ -31,11 +31,7 @@ type GameQuadrantProps = {
 };
 const GameQuadrant: Component<GameQuadrantProps> = (props) => {
   return (
-    <div
-      class={`flex flex-col flex-auto pr-1 first:pl-1 pt-1 pb-1 ${
-        props.gameX === 0 ? "mr-[1px]" : "ml-[1px]"
-      } ${props.gameY === 0 ? "mb-[1px]" : "mt-[1px]"}`}
-    >
+    <div class="flex flex-col flex-auto p-1">
       {GAME_ROWS_ARR.map((rowIndex) => (
         <div class="flex w-full">
           {GAME_COLS_ARR.map((colIndex) => (

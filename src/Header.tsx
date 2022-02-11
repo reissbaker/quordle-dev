@@ -17,7 +17,7 @@ const Header: Component<HeaderProps> = (props) => {
   });
 
   return (
-    <nav class="bg-gray-900 w-screen flex items-center px-4 py-2">
+    <nav class="bg-gray-900 w-screen flex items-center px-4 py-2 border-b-2 border-gray-800">
       <img src={favicon48} width="24" height="24" />
       <span class="ml-3">Quordle</span>
       <div class="flex-1">

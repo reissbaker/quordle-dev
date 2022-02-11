@@ -72,7 +72,7 @@ const GameCompleteBanner: Component<GameCompleteBannerProps> = (props) => {
   onCleanup(() => clearInterval(timer));
 
   return (
-    <div class="p-4 text-center bg-gray-900 border-t-[1px] border-gray-500">
+    <div class="p-4 text-center bg-gray-900 border-b-2 border-gray-800">
       <div
         class="text-4xl pb-2"
         classList={{

@@ -33,7 +33,7 @@ const GameShare: Component<GameShareProps> = (props) => {
   const [gamesData, gamesDataFuncs] = useGamesDataContext();
 
   return (
-    <div class="flex flex-col py-4 rounded-t-lg text-center bg-gray-900">
+    <div class="flex flex-col py-4 rounded-t-lg text-center bg-gray-900 border-t-2 border-gray-800">
       <div class="text-2xl flex">
         <div class="flex flex-1 justify-end items-center">
           <span
