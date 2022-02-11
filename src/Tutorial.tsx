@@ -35,8 +35,8 @@ type TutorialProps = {
 };
 const Tutorial: Component<TutorialProps> = (props) => {
   return (
-    <div class="quordle-desktop-scrollbar w-full h-full overflow-auto">
-      <div class="w-full flex flex-row-reverse pr-4 pt-2 top-0 absolute z-10">
+    <div class="w-full h-full overflow-auto">
+      <div class="w-full flex flex-row-reverse pr-4 pt-2">
         <button
           type="button"
           class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white"
@@ -58,7 +58,7 @@ const Tutorial: Component<TutorialProps> = (props) => {
           </svg>
         </button>
       </div>
-      <div class="max-w-[550px] m-auto w-full px-6 mt-14">
+      <div class="max-w-[550px] m-auto w-full px-6">
         <div class="text-3xl mt-2 mb-1">
           Guess all four QUORDLE words in 9 tries.
         </div>

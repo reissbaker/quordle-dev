@@ -32,8 +32,8 @@ const Statistics: Component<StatisticsProps> = (props) => {
   const totalGames = createMemo(() => numWins() + numLosses());
 
   return (
-    <div class="quordle-desktop-scrollbar w-full h-full overflow-auto">
-      <div class="w-full flex flex-row-reverse pr-4 pt-2 top-0 absolute z-10">
+    <div class="w-full h-full overflow-auto">
+      <div class="w-full flex flex-row-reverse pr-4 pt-2">
         <button
           type="button"
           class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white"
@@ -55,7 +55,7 @@ const Statistics: Component<StatisticsProps> = (props) => {
           </svg>
         </button>
       </div>
-      <div class="max-w-[550px] m-auto w-full px-6 mt-14">
+      <div class="max-w-[550px] m-auto w-full px-6">
         <div class="text-4xl mt-2 mb-4 text-center">
           {props.mode === "daily" ? "Daily" : "Practice"} Statistics
         </div>
