@@ -304,7 +304,8 @@ const GamesDataProvider: Component<GamesDataProviderProps> = (props) => {
               0
             );
             if (totalCorrect === 4) {
-              s[mode].history[Math.max(...s[mode].answersCorrect)]++;
+              const maxGuessIndex = Math.max(...s[mode].answersCorrect);
+              s[mode].history[maxGuessIndex]++;
               s[mode].currentStreak++;
               if (s[mode].currentStreak > s[mode].maxStreak) {
                 s[mode].maxStreak = s[mode].currentStreak;
@@ -313,9 +314,18 @@ const GamesDataProvider: Component<GamesDataProviderProps> = (props) => {
                 mode: mode,
                 daily_seed: mode === "daily" ? s[mode].seed : undefined,
                 guesses: s[mode].guesses,
+                num_guesses: maxGuessIndex + 1,
               });
             } else {
               s[mode].history[GAME_ROWS + totalCorrect]++;
+              if (s[mode].currentStreak > 0) {
+                gtagWrap("event", "streak_reset", {
+                  mode: mode,
+                  daily_seed: mode === "daily" ? s[mode].seed : undefined,
+                  current_streak: s[mode].currentStreak,
+                  max_streak: s[mode].maxStreak,
+                });
+              }
               s[mode].currentStreak = 0;
               gtagWrap("event", "loss", {
                 mode: mode,
