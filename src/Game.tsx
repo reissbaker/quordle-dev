@@ -32,7 +32,7 @@ type GameQuadrantProps = {
 const GameQuadrant: Component<GameQuadrantProps> = (props) => {
   return (
     <div
-      class={`quordle-board flex flex-col flex-auto ${
+      class={`flex flex-col flex-auto pr-1 first:pl-1 pt-1 pb-1 ${
         props.gameX === 0 ? "mr-[1px]" : "ml-[1px]"
       } ${props.gameY === 0 ? "mb-[1px]" : "mt-[1px]"}`}
     >
@@ -113,7 +113,7 @@ const Game: Component<GameProps> = (props) => {
         )}
       </div>
       <div
-        class="max-w-[550px] m-auto w-full flex-auto quordle-board-group"
+        class="quordle-board-group max-w-[550px] m-auto w-full flex-auto"
         classList={{
           "overflow-hidden": tutorialOpen() || statisticsOpen(),
           "overflow-auto": !(tutorialOpen() || statisticsOpen()),

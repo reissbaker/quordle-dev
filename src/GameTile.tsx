@@ -18,11 +18,17 @@ export const GameTileRenderer: Component<GameTileRendererProps> = (props) => {
     <div
       class="quordle-box w-[20%]"
       classList={{
-        "text-black bg-box-correct": props.state === "correct",
-        "text-black bg-box-diff": props.state === "diff",
+        "bg-box-correct": props.state === "correct",
+        "bg-box-diff": props.state === "diff",
+        "bg-gray-700":
+          props.state === "none" && props.rowTemporalState === "past",
+        "bg-gray-600": props.rowTemporalState === "present",
+        "bg-gray-900":
+          props.rowTemporalState === "future" ||
+          props.rowTemporalState === "never",
+        "text-black": props.state === "correct" || props.state === "diff",
         "text-red-500": props.state === "invalid",
-        "quordle-box-present": props.rowTemporalState === "present",
-        "quordle-box-past": props.rowTemporalState === "past",
+        "text-white": props.state === "none",
       }}
     >
       <div class="quordle-box-content" textContent={props.letter} />
@@ -95,15 +101,14 @@ const GameTile: Component<GameTileProps> = (props) => {
   const temporalState = createMemo((): TemporalState => {
     const gameData = gamesData[props.mode];
     const guesses = gameData.guesses;
-    const answer = gameData.answers[gameIndex];
-    const answerIndex = guesses.indexOf(answer);
+    const answerIndex = gameData.answersCorrect[gameIndex];
 
     // Have we already answered this row? We will never guess post-answer
-    if(answerIndex !== -1 && answerIndex <= props.gameRow) return "never";
+    if (answerIndex !== -1 && answerIndex < props.gameRow) return "never";
 
-    if(guesses.length > props.gameRow) return "past";
+    if (guesses.length > props.gameRow) return "past";
 
-    if(props.gameRow === guesses.length) return "present";
+    if (props.gameRow === guesses.length) return "present";
     return "future";
   });
 

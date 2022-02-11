@@ -27,7 +27,7 @@ const Key: Component<KeyProps> = (props) => {
     }
 
     if (!keyHasBeenGuessed) {
-      return "";
+      return "color: white;";
     }
 
     const colorOptions: { [key in BoxState]: string } = {
@@ -87,11 +87,11 @@ const Key: Component<KeyProps> = (props) => {
 
   return (
     <button
-      class="quordle-key w-[10%]"
+      class="quordle-key bg-zinc-600 w-[10%]"
       classList={{
-        "quordle-enter-top": props.key === "enter3",
-        "quordle-enter": props.key === "enter2",
-        "quordle-enter-left": props.key === "enter1",
+        "rounded-b-none": props.key === "enter3",
+        "ml-0 mt-0 rounded-t-none rounded-l-none": props.key === "enter2",
+        "w-[calc(10%+0.25rem)] rounded-r-none": props.key === "enter1",
       }}
       style={keyStyle()}
       onClick={() => {
@@ -134,7 +134,7 @@ type KeyboardProps = {
 };
 const Keyboard: Component<KeyboardProps> = (props) => {
   return (
-    <div class="w-full flex-col quordle-keyboard">
+    <div class="w-full flex-col pb-1">
       {KEYBOARD_KEYS.map((row, y) => (
         <div class="flex w-full">
           {row.map((key, x) => (

@@ -25,6 +25,7 @@ const TutorialWord: Component<TutorialWordProps> = (props) => {
         letter={letter}
         gameRow={0}
         gameCol={i}
+        rowTemporalState="past"
       />
     ));
 };

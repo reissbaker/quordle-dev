@@ -34,56 +34,20 @@ code {
     @apply bg-gray-700 text-white hover:bg-gray-700 hover:text-white !important;
   }
   .quordle-box {
-    @apply text-white bg-gray-900 m-1 rounded p-0 aspect-square relative select-none;
-  }
-  .quordle-box-present {
-    @apply bg-gray-600;
-  }
-  .quordle-box-past {
-    @apply bg-gray-700;
+    @apply m-0.5 rounded p-0 aspect-square relative select-none;
   }
   .quordle-box-content {
-    @apply absolute left-0 top-0 bottom-0 right-0 flex items-center justify-center;
-  }
-  .quordle-board {
-    @apply pr-1 first:pl-1 pt-1 pb-1;
-  }
-  .quordle-keyboard {
-    @apply pb-1;
+    @apply absolute left-0 top-0 bottom-0 right-0 justify-center;
   }
   .quordle-key {
-    @apply text-white bg-zinc-600 ml-1 mt-1 last:mr-1 rounded-sm p-0 aspect-square relative select-none;
+    @apply ml-1 mt-1 last:mr-1 rounded-sm aspect-square relative select-none;
   }
-  .quordle-enter-top {
-    @apply rounded-b-none;
-  }
-  .quordle-enter-left {
-    @apply rounded-r-none;
-  }
-  .quordle-enter {
-    @apply ml-0 mt-0 rounded-t-none rounded-l-none;
-  }
-}
-
-.quordle-enter-left {
-  width: calc(10% + 0.25rem);
-}
-
-.quordle-enter-top {
-  height: calc(10% + 0.25rem);
-}
-
-/* manual font alignment */
-.quordle-box-content {
-  top: -2px;
-}
-
-/*Make the scrollbar less awk on desktop*/
-@media(min-width: 1024px) {
-  .quordle-board-group::-webkit-scrollbar {
-    width: 1px;
-  }
-  .quordle-board-group::-webkit-scrollbar-thumb {
-    background-color: #fff;
+  @media(min-width: 1024px) {
+    .quordle-board-group::-webkit-scrollbar {
+      @apply w-[2px];
+    }
+    .quordle-board-group::-webkit-scrollbar-thumb {
+      @apply bg-gray-500;
+    }
   }
 }
