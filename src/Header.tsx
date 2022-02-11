@@ -30,7 +30,7 @@ const Header: Component<HeaderProps> = (props) => {
               onClick={vibrate}
               end
             >
-              Daily #{dailySeed()}
+              Daily{/*#{dailySeed()}*/}
             </NavLink>
             <NavLink
               href="/practice"
