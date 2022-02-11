@@ -80,7 +80,7 @@ function roundRect(
   ctx.fill();
 }
 
-export const shareGame = (
+export const shareGame = async (
   mode: GameMode,
   gameData: DeepReadonly<GameData>,
   shareType: ShareType
@@ -325,13 +325,15 @@ export const shareGame = (
       y++;
     }
 
-    canvas.toBlob((blob) => {
-      if (!blob) return;
-      const file = new File([blob], "quordle.png", { type: "image/png" });
-      navigator.share({
-        files: [file],
-        text: textMobileShare,
-      });
+    const blob: Blob | null = await new Promise((resolve) =>
+      canvas.toBlob(resolve)
+    );
+
+    if (!blob) return;
+    const file = new File([blob], "quordle.png", { type: "image/png" });
+    navigator.share({
+      files: [file],
+      text: textMobileShare,
     });
   }
 };

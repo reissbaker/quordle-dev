@@ -4,20 +4,7 @@ import { Component } from "solid-js";
 type NotFoundProps = {};
 const NotFound: Component<NotFoundProps> = (props) => {
   return (
-    <div
-      class="
-        px-5
-        absolute
-        flex
-        items-center
-        justify-center
-        w-full
-        h-full
-        bg-gradient-to-r
-        from-indigo-600
-        to-blue-400
-      "
-    >
+    <div class="px-5 absolute flex items-center justify-center w-full h-full bg-gradient-to-r from-indigo-600 to-blue-400">
       <div class="p-10 bg-white rounded-md shadow-xl">
         <div class="flex flex-col items-center">
           <h1 class="font-bold text-blue-600 text-9xl">404</h1>

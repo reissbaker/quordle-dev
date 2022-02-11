@@ -1,4 +1,9 @@
 import { Component, JSX } from "solid-js";
+import {
+  CAN_COPY_CLIPBOARD,
+  CAN_SHARE_IMAGE,
+  CAN_SHARE_TEXT,
+} from "./constants";
 import { useGamesDataContext } from "./GameDataProvider";
 import { ClipboardCopyIcon, ShareIcon, TwitterIcon } from "./icons";
 import { getNumEmoji, shareGame } from "./share";
@@ -88,8 +93,7 @@ const GameShare: Component<GameShareProps> = (props) => {
           </span>
         </div>
       </div>
-      {/* @ts-ignore */}
-      {navigator.share && (
+      {CAN_SHARE_TEXT && (
         <>
           <div class="flex items-center justify-center mt-2">
             <ShareButton
@@ -102,21 +106,23 @@ const GameShare: Component<GameShareProps> = (props) => {
                 <div class="ml-2">Share</div>
               </div>
             </ShareButton>
-            <ShareButton
-              class="ml-2"
-              onClick={() => {
-                shareGame(props.mode, gamesData[props.mode], "image");
-              }}
-            >
-              <div class="flex items-center justify-center">
-                <TwitterIcon />
-                <div class="ml-2">Share as Image</div>
-              </div>
-            </ShareButton>
+            {CAN_SHARE_IMAGE && (
+              <ShareButton
+                class="ml-2"
+                onClick={() => {
+                  shareGame(props.mode, gamesData[props.mode], "image");
+                }}
+              >
+                <div class="flex items-center justify-center">
+                  <TwitterIcon />
+                  <div class="ml-2">Share as Image</div>
+                </div>
+              </ShareButton>
+            )}
           </div>
         </>
       )}
-      {navigator.clipboard && (
+      {CAN_COPY_CLIPBOARD && (
         <div class="flex items-center justify-center mt-2">
           <ShareButton
             onClick={() => {
