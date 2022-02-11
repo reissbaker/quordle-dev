@@ -39,6 +39,10 @@ code {
   .quordle-box-content {
     @apply absolute left-0 top-0 bottom-0 right-0 flex items-center justify-center;
   }
+
+/* manual font alignment */
+.quordle-box-content {
+  top: -2px;
 }
 
 /*Make the scrollbar less awk on desktop*/
