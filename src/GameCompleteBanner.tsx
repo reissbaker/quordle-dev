@@ -1,35 +1,9 @@
 import { Component, createMemo, createSignal, JSX, onCleanup } from "solid-js";
-import { GAME_PERIOD_MS, START_DATE, TimeUnits } from "./constants";
+import { GAME_PERIOD_MS, START_DATE } from "./constants";
 import { useGamesDataContext } from "./GameDataProvider";
 import { PlusIcon } from "./icons";
-import { GameMode, RelativeTimeFormatUnit } from "./types";
-import { vibrate } from "./utils";
-
-function timeUntil(date1: Date, date2: Date) {
-  if ("RelativeTimeFormat" in Intl) {
-    // @ts-ignore
-    const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
-    const elapsed = date2.valueOf() - date1.valueOf();
-    for (const u in TimeUnits) {
-      const unit = u as RelativeTimeFormatUnit;
-      if (Math.abs(elapsed) > TimeUnits[unit] || u === "second") {
-        return rtf.format(Math.round(elapsed / TimeUnits[unit]), unit);
-      }
-    }
-    return `${elapsed} ms`;
-  }
-
-  const ms = date2.getTime() - date1.getTime();
-  let interval = Math.floor(ms / TimeUnits.hour);
-  if (interval > 1) {
-    return "in " + interval + " hours";
-  }
-  interval = Math.floor(ms / TimeUnits.minute);
-  if (interval > 1) {
-    return "in " + interval + " minutes";
-  }
-  return "in " + Math.floor(ms / TimeUnits.second) + " seconds";
-}
+import { GameMode } from "./types";
+import { timeUntil, vibrate } from "./utils";
 
 type NewGameButtonProps = {
   onClick?: JSX.EventHandlerUnion<HTMLButtonElement, MouseEvent>;
