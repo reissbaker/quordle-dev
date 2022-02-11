@@ -40,3 +40,13 @@ code {
     @apply absolute left-0 top-0 bottom-0 right-0 flex items-center justify-center;
   }
 }
+
+/*Make the scrollbar less awk on desktop*/
+@media(min-width: 1024px) {
+  .quordle-board-group::-webkit-scrollbar {
+    width: 1px;
+  }
+  .quordle-board-group::-webkit-scrollbar-thumb {
+    background-color: #fff;
+  }
+}
