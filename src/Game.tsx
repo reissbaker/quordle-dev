@@ -16,7 +16,7 @@ import Header from "./Header";
 import Keyboard from "./Keyboard";
 import Tutorial from "./Tutorial";
 import { GameMode } from "./types";
-import { gtagWrap } from "./utils";
+import { gtagWrap, vibrate } from "./utils";
 
 const NUM_GAMES_X_ARR = [...Array(NUM_GAMES_X).keys()];
 const NUM_GAMES_Y_ARR = [...Array(NUM_GAMES_Y).keys()];
@@ -84,6 +84,7 @@ const Game: Component<GameProps> = (props) => {
     >
       <Header
         onOpenTutorial={() => {
+          vibrate();
           gtagWrap("event", "tutorial");
           setSearchParams({ tutorial: true });
         }}
@@ -142,7 +143,10 @@ const Game: Component<GameProps> = (props) => {
         }}
       >
         <Tutorial
-          onCloseTutorial={() => setSearchParams({ tutorial: undefined })}
+          onCloseTutorial={() => {
+            vibrate();
+            setSearchParams({ tutorial: undefined });
+          }}
         />
       </div>
     </div>

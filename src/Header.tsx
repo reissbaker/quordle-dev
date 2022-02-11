@@ -3,6 +3,7 @@ import { Component, createMemo } from "solid-js";
 import favicon48 from "./assets/favicon-48.png";
 import { useGamesDataContext } from "./GameDataProvider";
 import { HelpIcon } from "./icons";
+import { vibrate } from "./utils";
 
 type HeaderProps = {
   onOpenTutorial: () => void;
@@ -25,6 +26,7 @@ const Header: Component<HeaderProps> = (props) => {
               href="/"
               activeClass="quordle-nav-active"
               class="quordle-nav"
+              onClick={vibrate}
               end
             >
               Daily #{dailySeed()}
@@ -33,6 +35,7 @@ const Header: Component<HeaderProps> = (props) => {
               href="/practice"
               activeClass="quordle-nav-active"
               class="quordle-nav"
+              onClick={vibrate}
               end
             >
               Practice

@@ -3,6 +3,7 @@ import { GAME_PERIOD_MS, START_DATE, TimeUnits } from "./constants";
 import { useGamesDataContext } from "./GameDataProvider";
 import { PlusIcon } from "./icons";
 import { GameMode, RelativeTimeFormatUnit } from "./types";
+import { vibrate } from "./utils";
 
 function timeUntil(date1: Date, date2: Date) {
   if ("RelativeTimeFormat" in Intl) {
@@ -90,6 +91,7 @@ const GameCompleteBanner: Component<GameCompleteBannerProps> = (props) => {
       {props.mode === "free" ? (
         <NewGameButton
           onClick={() => {
+            vibrate();
             gamesDataFuncs.resetFree();
           }}
         >

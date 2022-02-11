@@ -8,6 +8,7 @@ import { useGamesDataContext } from "./GameDataProvider";
 import { ClipboardCopyIcon, ShareIcon, TwitterIcon } from "./icons";
 import { getNumEmoji, shareGame } from "./share";
 import { GameMode } from "./types";
+import { vibrate } from "./utils";
 
 type ShareButtonsProps = {
   onClick?: JSX.EventHandlerUnion<HTMLButtonElement, MouseEvent>;
@@ -98,6 +99,7 @@ const GameShare: Component<GameShareProps> = (props) => {
           <div class="flex items-center justify-center mt-2">
             <ShareButton
               onClick={() => {
+                vibrate();
                 shareGame(props.mode, gamesData[props.mode], "share");
               }}
             >
@@ -110,6 +112,7 @@ const GameShare: Component<GameShareProps> = (props) => {
               <ShareButton
                 class="ml-2"
                 onClick={() => {
+                  vibrate();
                   shareGame(props.mode, gamesData[props.mode], "image");
                 }}
               >
@@ -126,6 +129,7 @@ const GameShare: Component<GameShareProps> = (props) => {
         <div class="flex items-center justify-center mt-2">
           <ShareButton
             onClick={() => {
+              vibrate();
               shareGame(props.mode, gamesData[props.mode], "clipboard");
             }}
           >

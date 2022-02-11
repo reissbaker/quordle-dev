@@ -2,6 +2,7 @@ import { Component, createMemo } from "solid-js";
 import { ALPHABET, KEYBOARD_KEYS } from "./constants";
 import { useGamesDataContext } from "./GameDataProvider";
 import { BoxState, GameMode } from "./types";
+import { vibrate } from "./utils";
 
 type KeyProps = {
   mode: GameMode;
@@ -94,8 +95,8 @@ const Key: Component<KeyProps> = (props) => {
         "border-r-transparent": props.key === "enter1",
       }}
       style={keyStyle()}
-      onClick={(e) => {
-        e.preventDefault();
+      onClick={() => {
+        vibrate();
         gamesDataFuncs.sendKey(
           props.mode,
           new KeyboardEvent("keydown", {
