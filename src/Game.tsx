@@ -14,6 +14,7 @@ import GameShare from "./GameShare";
 import GameSquare from "./GameTile";
 import Header from "./Header";
 import Keyboard from "./Keyboard";
+import Statistics from "./Statistics";
 import Tutorial from "./Tutorial";
 import { GameMode } from "./types";
 import { gtagWrap, vibrate } from "./utils";
@@ -68,7 +69,10 @@ const Game: Component<GameProps> = (props) => {
   document.addEventListener("keydown", keyEventListener);
   onCleanup(() => document.removeEventListener("keydown", keyEventListener));
 
-  const tutorialOpen = createMemo(() => searchParams.tutorial === "true");
+  const tutorialOpen = createMemo(() => searchParams.overlay === "tutorial");
+  const statisticsOpen = createMemo(
+    () => searchParams.overlay === "statistics"
+  );
 
   const refCallback = createResizeObserver({
     onResize: ({ width }) => setFontSize(width / 15),
@@ -85,8 +89,17 @@ const Game: Component<GameProps> = (props) => {
       <Header
         onOpenTutorial={() => {
           vibrate();
-          gtagWrap("event", "tutorial");
-          setSearchParams({ tutorial: true });
+          gtagWrap("event", "tutorial", {
+            mode: props.mode,
+          });
+          setSearchParams({ overlay: "tutorial" });
+        }}
+        onOpenStatistics={() => {
+          vibrate();
+          gtagWrap("event", "statistics", {
+            mode: props.mode,
+          });
+          setSearchParams({ overlay: "statistics" });
         }}
       />
       <div
@@ -102,8 +115,8 @@ const Game: Component<GameProps> = (props) => {
       <div
         class="max-w-[550px] m-auto w-full flex-auto"
         classList={{
-          "overflow-hidden": tutorialOpen(),
-          "overflow-auto": !tutorialOpen(),
+          "overflow-hidden": tutorialOpen() || statisticsOpen(),
+          "overflow-auto": !(tutorialOpen() || statisticsOpen()),
         }}
         style={{
           "font-size": fontSize() + "px",
@@ -135,6 +148,24 @@ const Game: Component<GameProps> = (props) => {
       <div
         class="absolute w-full h-full bg-gray-800 overflow-auto transition-all ease-in-out duration-500"
         classList={{
+          "opacity-100 top-0": statisticsOpen(),
+          "opacity-0 top-[100%]": !statisticsOpen(),
+        }}
+        style={{
+          "font-size": fontSize() + "px",
+        }}
+      >
+        <Statistics
+          mode={props.mode}
+          onCloseStatistics={() => {
+            vibrate();
+            setSearchParams({ overlay: undefined });
+          }}
+        />
+      </div>
+      <div
+        class="absolute w-full h-full bg-gray-800 overflow-auto transition-all ease-in-out duration-500"
+        classList={{
           "opacity-100 top-0": tutorialOpen(),
           "opacity-0 top-[100%]": !tutorialOpen(),
         }}
@@ -145,7 +176,7 @@ const Game: Component<GameProps> = (props) => {
         <Tutorial
           onCloseTutorial={() => {
             vibrate();
-            setSearchParams({ tutorial: undefined });
+            setSearchParams({ overlay: undefined });
           }}
         />
       </div>

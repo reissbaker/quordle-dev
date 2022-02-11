@@ -118,6 +118,8 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
       states: [[], [], [], []],
       answersCorrect: [-1, -1, -1, -1],
       history: new Array(GAME_ROWS + 4).fill(0),
+      currentStreak: 0,
+      maxStreak: 0,
     },
     free: {
       seed: 0,
@@ -127,6 +129,8 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
       states: [[], [], [], []],
       answersCorrect: [-1, -1, -1, -1],
       history: new Array(GAME_ROWS + 4).fill(0),
+      currentStreak: 0,
+      maxStreak: 0,
     },
   };
   (["daily", "free"] as GameMode[]).forEach((mode) => {
@@ -138,6 +142,12 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
       const history = historyStr
         ? historyStr.split(",").map(Number)
         : new Array(GAME_ROWS + 4).fill(0);
+      const currentStreak = Number(
+        window.localStorage.getItem(mode + "_current_streak") || 0
+      );
+      const maxStreak = Number(
+        window.localStorage.getItem(mode + "_max_streak") || 0
+      );
       if (lastSeed && (mode === "free" || lastSeed === currentDailySeed)) {
         const guessesArr = guesses ? guesses.split(",") : [];
         const answers = generateWordsFromSeed(lastSeed);
@@ -151,6 +161,8 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
             guessesArr.indexOf(answers[i])
           ),
           history,
+          currentStreak,
+          maxStreak,
         };
         gtagWrap("event", "restore", {
           mode: mode,
@@ -167,6 +179,8 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
           states: generateAllGamesBoxStates([], answers),
           answersCorrect: [-1, -1, -1, -1],
           history,
+          currentStreak,
+          maxStreak,
         };
         gtagWrap("event", "start", {
           mode: mode,
@@ -184,6 +198,8 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
         states: generateAllGamesBoxStates([], answers),
         answersCorrect: [-1, -1, -1, -1],
         history: new Array(GAME_ROWS + 4).fill(0),
+        currentStreak: 0,
+        maxStreak: 0,
       };
       gtagWrap("event", "start", {
         mode: mode,
@@ -204,8 +220,12 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
           state[mode].guesses.join(",")
         );
         window.localStorage.setItem(
-          mode + "_history",
-          state[mode].history.join(",")
+          mode + "_current_streak",
+          String(state[mode].currentStreak)
+        );
+        window.localStorage.setItem(
+          mode + "_max_streak",
+          String(state[mode].maxStreak)
         );
       });
     } catch (e) {
@@ -285,6 +305,10 @@ const GamesDataProvider: Component<GamesDataProviderProps> = (props) => {
             );
             if (totalCorrect === 4) {
               s[mode].history[Math.max(...s[mode].answersCorrect)]++;
+              s[mode].currentStreak++;
+              if (s[mode].currentStreak > s[mode].maxStreak) {
+                s[mode].maxStreak = s[mode].currentStreak;
+              }
               gtagWrap("event", "win", {
                 mode: mode,
                 daily_seed: mode === "daily" ? s[mode].seed : undefined,
@@ -292,6 +316,7 @@ const GamesDataProvider: Component<GamesDataProviderProps> = (props) => {
               });
             } else {
               s[mode].history[GAME_ROWS + totalCorrect]++;
+              s[mode].currentStreak = 0;
               gtagWrap("event", "loss", {
                 mode: mode,
                 daily_seed: mode === "daily" ? s[mode].seed : undefined,

@@ -14,6 +14,8 @@ export type GameData = {
   states: BoxState[][][];
   answersCorrect: number[];
   history: number[];
+  currentStreak: number;
+  maxStreak: number;
 };
 export type GamesData = { [key in GameMode]: GameData };
 export type GamesDataProviderFuncs = {

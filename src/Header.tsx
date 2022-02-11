@@ -2,11 +2,12 @@ import { NavLink } from "solid-app-router";
 import { Component, createMemo } from "solid-js";
 import favicon48 from "./assets/favicon-48.png";
 import { useGamesDataContext } from "./GameDataProvider";
-import { HelpIcon } from "./icons";
+import { HelpIcon, StatisticsIcon } from "./icons";
 import { vibrate } from "./utils";
 
 type HeaderProps = {
   onOpenTutorial: () => void;
+  onOpenStatistics: () => void;
 };
 const Header: Component<HeaderProps> = (props) => {
   const [gamesData, gamesDataFuncs] = useGamesDataContext();
@@ -44,16 +45,20 @@ const Header: Component<HeaderProps> = (props) => {
         </div>
       </div>
       <div class="flex items-center sm:inset-auto sm:ml-6">
-        <div>
-          <button
-            type="button"
-            class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white"
-            onClick={props.onOpenTutorial}
-            id="help-button"
-          >
-            <HelpIcon />
-          </button>
-        </div>
+        <button
+          type="button"
+          class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white"
+          onClick={props.onOpenStatistics}
+        >
+          <StatisticsIcon />
+        </button>
+        <button
+          type="button"
+          class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white ml-2"
+          onClick={props.onOpenTutorial}
+        >
+          <HelpIcon />
+        </button>
       </div>
     </nav>
   );
