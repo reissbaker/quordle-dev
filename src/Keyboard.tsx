@@ -65,23 +65,15 @@ const Key: Component<KeyProps> = (props) => {
       }
     }
     return (
-      "background-image: linear-gradient(45deg, " +
-      keyColors[0] +
-      ", " +
-      keyColors[0] +
-      " 100%), linear-gradient(135deg, " +
-      keyColors[2] +
-      ", " +
-      keyColors[2] +
-      "), linear-gradient(225deg, " +
+      "background: conic-gradient(" +
       keyColors[1] +
-      ", " +
-      keyColors[1] +
-      ") , linear-gradient(225deg, " +
+      " 0deg 90deg, " +
       keyColors[3] +
-      ", " +
-      keyColors[3] +
-      "); color: black;"
+      " 90deg 180deg, " +
+      keyColors[2] +
+      " 180deg 270deg, " +
+      keyColors[0] +
+      " 270deg 360deg); color: black;"
     );
   });
 
