@@ -25,42 +25,42 @@ import {
   GamesData,
   GamesDataProviderFuncs,
 } from "./types";
-import { gtagWrap, indexOfAll } from "./utils";
+import { gtagWrap } from "./utils";
 
 export const generateBoxStatesFromGuess = (
   guess: string,
   answer: string
 ): BoxState[] => {
-  const states: BoxState[] = [];
-  for (let i = 0; i < GAME_COLS; i++) {
-    const guessLetter = guess[i];
-    const answerLetter = answer[i];
-    if (guessLetter === answerLetter) {
-      states.push("correct");
-    } else if (answer.indexOf(guessLetter) >= 0) {
-      const allOtherIndicies = indexOfAll(answer, guessLetter);
-      let hasLetterCorrectElsewhere = false;
-      let hasLetterIncorrectElsewhere = false;
-      for (const index of allOtherIndicies) {
-        if (index === i) continue;
-        if (answer[index] === guess[index]) {
-          hasLetterCorrectElsewhere = true;
-        } else if (
-          answer[index] !== guess[index] &&
-          answer[index] === guessLetter
-        ) {
-          hasLetterIncorrectElsewhere = true;
-        }
-      }
-      states.push(
-        hasLetterCorrectElsewhere && !hasLetterIncorrectElsewhere
-          ? "none"
-          : "diff"
-      );
-    } else {
-      states.push("none");
+  const ans = answer.split("");
+  const gue = guess.split("");
+  const states: BoxState[] = new Array(GAME_COLS).fill("none");
+  const guessLetters: { [letter: string]: number } = {};
+
+  for (let column = 0; column < GAME_COLS; column++) {
+    guessLetters[gue[column]] = 0;
+  }
+  for (let column = 0; column < GAME_COLS; column++) {
+    if (ans[column] === gue[column]) {
+      ans[column] = " ";
+      guessLetters[gue[column]] = 2;
+      gue[column] = " ";
+      states[column] = "correct";
     }
   }
+  for (let column = 0; column < GAME_COLS; column++) {
+    if (
+      ans.indexOf(gue[column]) !== -1 &&
+      ans[column] !== gue[column] &&
+      gue[column] !== " "
+    ) {
+      if (guessLetters[gue[column]] != 2) {
+        guessLetters[gue[column]] = 1;
+      }
+      ans[ans.indexOf(gue[column])] = " ";
+      states[column] = "diff";
+    }
+  }
+
   return states;
 };
 
