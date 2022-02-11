@@ -66,7 +66,7 @@ const Statistics: Component<StatisticsProps> = (props) => {
           </div>
           <div class="flex flex-col text-center flex-1">
             <span class="text-xl">
-              {totalGames() > 0 ? numWins() / totalGames() : 0 * 100}
+              {(totalGames() > 0 ? numWins() / totalGames() : 0) * 100}
             </span>
             <span class="text-base">Win %</span>
           </div>
