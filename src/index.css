@@ -37,7 +37,7 @@ code {
     @apply m-0.5 rounded p-0 aspect-square relative select-none;
   }
   .quordle-box-content {
-    @apply absolute left-0 top-0 bottom-0 right-0 justify-center;
+    @apply absolute left-0 top-0 bottom-0 right-0 flex items-center justify-center;
   }
   .quordle-key {
     @apply ml-1 mt-1 last:mr-1 rounded-sm aspect-square relative select-none;
