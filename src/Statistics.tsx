@@ -94,7 +94,7 @@ const Statistics: Component<StatisticsProps> = (props) => {
             <div class="flex flex-row mb-1">
               <div class="mr-2">{i + 1}</div>
               <div
-                class="min-w-min bg-gray-900 px-2"
+                class="min-w-min text-right bg-gray-900 px-2"
                 style={{
                   width:
                     (gamesData[props.mode].history[i] / winMaxValue()) * 100 +
@@ -113,7 +113,7 @@ const Statistics: Component<StatisticsProps> = (props) => {
             <div class="flex flex-row mb-1">
               <div class="mr-2">{i - 9}</div>
               <div
-                class="min-w-min bg-gray-900 px-2"
+                class="min-w-min text-right bg-gray-900 px-2"
                 style={{
                   width:
                     (gamesData[props.mode].history[i] / lossMaxValue()) * 100 +
