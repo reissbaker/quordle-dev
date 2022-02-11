@@ -36,6 +36,11 @@ code {
   .quordle-box {
     @apply text-white bg-gray-900 m-1 rounded p-0 aspect-square relative select-none;
   }
+  .quordle-box-present {
+    @apply bg-gray-600;
+  }
+  .quordle-box-past {
+    @apply bg-gray-700;
   }
   .quordle-box-content {
     @apply absolute left-0 top-0 bottom-0 right-0 flex items-center justify-center;

@@ -4,23 +4,25 @@ import { useGamesDataContext } from "./GameDataProvider";
 import { BoxState, GameMode } from "./types";
 
 type GameTileState = BoxState | "invalid";
+type TemporalState = "past" | "present" | "future" | "never";
 
 type GameTileRendererProps = {
   gameRow: number;
   gameCol: number;
   state: GameTileState;
   letter: string;
+  rowTemporalState: TemporalState;
 };
 export const GameTileRenderer: Component<GameTileRendererProps> = (props) => {
   return (
     <div
       class="quordle-box w-[20%]"
       classList={{
-        "border-t-[1px]": props.gameRow === 0,
-        "border-l-[1px]": props.gameCol === 0,
         "text-black bg-box-correct": props.state === "correct",
         "text-black bg-box-diff": props.state === "diff",
         "text-red-500": props.state === "invalid",
+        "quordle-box-present": props.rowTemporalState === "present",
+        "quordle-box-past": props.rowTemporalState === "past",
       }}
     >
       <div class="quordle-box-content" textContent={props.letter} />
@@ -90,12 +92,28 @@ const GameTile: Component<GameTileProps> = (props) => {
     return "none";
   });
 
+  const temporalState = createMemo((): TemporalState => {
+    const gameData = gamesData[props.mode];
+    const guesses = gameData.guesses;
+    const answer = gameData.answers[gameIndex];
+    const answerIndex = guesses.indexOf(answer);
+
+    // Have we already answered this row? We will never guess post-answer
+    if(answerIndex !== -1 && answerIndex <= props.gameRow) return "never";
+
+    if(guesses.length > props.gameRow) return "past";
+
+    if(props.gameRow === guesses.length) return "present";
+    return "future";
+  });
+
   return (
     <GameTileRenderer
       state={gameTileState()}
       letter={letter()}
       gameRow={props.gameRow}
       gameCol={props.gameCol}
+      rowTemporalState={temporalState()}
     />
   );
 };
