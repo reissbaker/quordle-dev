@@ -13,6 +13,7 @@ export type GameData = {
   current: string;
   states: BoxState[][][];
   answersCorrect: number[];
+  history: number[];
 };
 export type GamesData = { [key in GameMode]: GameData };
 export type GamesDataProviderFuncs = {

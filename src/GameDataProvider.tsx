@@ -117,6 +117,7 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
       current: "",
       states: [[], [], [], []],
       answersCorrect: [-1, -1, -1, -1],
+      history: new Array(GAME_ROWS + 4).fill(0),
     },
     free: {
       seed: 0,
@@ -125,6 +126,7 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
       current: "",
       states: [[], [], [], []],
       answersCorrect: [-1, -1, -1, -1],
+      history: new Array(GAME_ROWS + 4).fill(0),
     },
   };
   (["daily", "free"] as GameMode[]).forEach((mode) => {
@@ -132,6 +134,10 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
     try {
       const lastSeed = Number(window.localStorage.getItem("last_" + mode));
       const guesses = window.localStorage.getItem(mode + "_guesses") || "";
+      const historyStr = window.localStorage.getItem(mode + "_history");
+      const history = historyStr
+        ? historyStr.split(",").map(Number)
+        : new Array(GAME_ROWS + 4).fill(0);
       if (lastSeed && (mode === "free" || lastSeed === currentDailySeed)) {
         const guessesArr = guesses ? guesses.split(",") : [];
         const answers = generateWordsFromSeed(lastSeed);
@@ -144,6 +150,7 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
           answersCorrect: [0, 1, 2, 3].map((i) =>
             guessesArr.indexOf(answers[i])
           ),
+          history,
         };
         gtagWrap("event", "restore", {
           mode: mode,
@@ -159,6 +166,7 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
           current: "",
           states: generateAllGamesBoxStates([], answers),
           answersCorrect: [-1, -1, -1, -1],
+          history,
         };
         gtagWrap("event", "start", {
           mode: mode,
@@ -175,6 +183,7 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
         current: "",
         states: generateAllGamesBoxStates([], answers),
         answersCorrect: [-1, -1, -1, -1],
+        history: new Array(GAME_ROWS + 4).fill(0),
       };
       gtagWrap("event", "start", {
         mode: mode,
@@ -193,6 +202,10 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
         window.localStorage.setItem(
           mode + "_guesses",
           state[mode].guesses.join(",")
+        );
+        window.localStorage.setItem(
+          mode + "_history",
+          state[mode].history.join(",")
         );
       });
     } catch (e) {
@@ -271,12 +284,14 @@ const GamesDataProvider: Component<GamesDataProviderProps> = (props) => {
               0
             );
             if (totalCorrect === 4) {
+              s[mode].history[Math.max(...s[mode].answersCorrect)]++;
               gtagWrap("event", "win", {
                 mode: mode,
                 daily_seed: mode === "daily" ? s[mode].seed : undefined,
                 guesses: s[mode].guesses,
               });
             } else {
+              s[mode].history[GAME_ROWS + totalCorrect]++;
               gtagWrap("event", "loss", {
                 mode: mode,
                 daily_seed: mode === "daily" ? s[mode].seed : undefined,
