@@ -1,5 +1,6 @@
 import { Component } from "solid-js";
 import { GameTileRenderer } from "./GameTile";
+import { FacebookIcon, GithubIcon, RedditIcon, TwitterIcon } from "./icons";
 import { BoxState } from "./types";
 
 type TutorialWordType = [string, BoxState[]];
@@ -121,8 +122,96 @@ const Tutorial: Component<TutorialProps> = (props) => {
         <div class="text-base mb-6">
           You have 9 guesses to get all 4 words correct. Good luck!
         </div>
-        <div class="text-base mb-6">
+        <div class="text-base mb-8">
           A new QUORDLE will be available each day!
+        </div>
+        <div class="text-sm mb-2 text-center">Created by Freddie Meyer</div>
+        <div class="flex flex-row items-center justify-center mb-8">
+          <a
+            class="px-4"
+            href="https://github.com/fireph/quordle"
+            target="_blank"
+          >
+            <GithubIcon height={48} />
+          </a>
+          <a class="px-4" href="https://twitter.com/quordle" target="_blank">
+            <TwitterIcon height={36} />
+          </a>
+          <a
+            class="px-4"
+            href="https://www.facebook.com/quordle"
+            target="_blank"
+          >
+            <FacebookIcon height={48} />
+          </a>
+          <a
+            class="px-4"
+            href="https://www.reddit.com/r/Quordle/"
+            target="_blank"
+          >
+            <RedditIcon height={40} />
+          </a>
+        </div>
+        <div class="text-3xl my-4 text-center">History of Quordle</div>
+        <div class="text-base mb-6">
+          It all started on January 29, 2022 when I saw an article mentioning{" "}
+          <a
+            class="underline"
+            href="https://zaratustra.itch.io/dordle"
+            target="_blank"
+          >
+            Dordle
+          </a>{" "}
+          by Guilherme S. T&#246;ws and we all started playing it as a group. It
+          was a blast to play something more difficult than Wordle, but we still
+          found it uncommon to fail to guess both words in 7 attempts.
+          <br />
+          <br />
+          In a moment of evil and genius,{" "}
+          <a
+            class="underline"
+            href="https://github.com/DavidMah"
+            target="_blank"
+          >
+            David Mah
+          </a>{" "}
+          hacked together the first prototype of Quordle on January 30th and
+          linked it to the group chat. It was truly horrific code (it even had 2
+          keyboards &#128517;), but I knew that I had to continue the madness.
+          With hindsight, he really baited me into finishing his monstrous
+          creation.
+          <br />
+          <br />
+          Over the next 2 days I improved the code, removed the second keyboard,
+          and added the color quadrant keyboard. I even added Google Analytics
+          thinking it would be funny to see the stats for our friend group
+          playing.
+          <br />
+          <br />
+          At first it was just a few dozen players (there was a group of 20-30
+          people in Ohio that were playing constantly the first few days). But
+          then Quordle got written about in an article in{" "}
+          <a
+            class="underline"
+            href="https://www.theguardian.com/games/2022/feb/06/worried-about-losing-wordle-here-are-some-alternatives-just-in-case"
+            target="_blank"
+          >
+            The Guardian
+          </a>{" "}
+          and things exploded quickly from there. Now Quordle has over 60k
+          players daily and has had over 160k total players.
+          <br />
+          <br />
+          A shoutout to our friend that plays relentless while indoor cycling.
+          You were the drive to create a better version and your passion made me
+          realize it could be popular outside of our friend group. I am so glad
+          the world has been thoroughly cursed by Quordle and can't wait to see
+          how Quordle strategies evolve!
+          <br />
+          <br />I have no plans to monetize Quordle, I just enjoy watching
+          everyone enjoy this insane game and couldn't have done it without
+          Guilherme S. T&#246;ws and David Mah. If you have any ideas for
+          Quordle or just want to chat, check out the socials posted above.
         </div>
       </div>
     </div>
