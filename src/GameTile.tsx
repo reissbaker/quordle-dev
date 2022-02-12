@@ -20,15 +20,15 @@ export const GameTileRenderer: Component<GameTileRendererProps> = (props) => {
       classList={{
         "bg-box-correct": props.state === "correct",
         "bg-box-diff": props.state === "diff",
-        "bg-gray-700":
+        "bg-gray-200 dark:bg-gray-700":
           props.state === "none" && props.rowTemporalState === "past",
-        "bg-gray-600": props.rowTemporalState === "present",
-        "bg-gray-900":
+        "bg-gray-300 dark:bg-gray-600": props.rowTemporalState === "present",
+        "bg-gray-100 dark:bg-gray-900":
           props.rowTemporalState === "future" ||
           props.rowTemporalState === "never",
         "text-black": props.state === "correct" || props.state === "diff",
-        "text-red-500": props.state === "invalid",
-        "text-white": props.state === "none",
+        "text-rose-600": props.state === "invalid",
+        "text-black dark:text-white": props.state === "none",
       }}
     >
       <div class="quordle-box-content" textContent={props.letter} />

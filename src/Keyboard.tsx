@@ -27,7 +27,7 @@ const Key: Component<KeyProps> = (props) => {
     }
 
     if (!keyHasBeenGuessed) {
-      return "color: white;";
+      return "";
     }
 
     const colorOptions: { [key in BoxState]: string } = {
@@ -73,17 +73,19 @@ const Key: Component<KeyProps> = (props) => {
       keyColors[2] +
       " 180deg 270deg, " +
       keyColors[0] +
-      " 270deg 360deg); color: black;"
+      " 270deg 360deg);"
     );
   });
 
   return (
     <button
-      class="quordle-key bg-zinc-600 w-[10%]"
+      class="quordle-key bg-zinc-300 dark:bg-zinc-600 w-[10%]"
       classList={{
         "rounded-b-none": props.key === "enter3",
         "ml-0 mt-0 rounded-t-none rounded-l-none": props.key === "enter2",
         "w-[calc(10%+0.25rem)] rounded-r-none": props.key === "enter1",
+        "text-black dark:text-black": !!keyStyle(),
+        "text-black dark:text-white": !keyStyle(),
       }}
       style={keyStyle()}
       onClick={() => {

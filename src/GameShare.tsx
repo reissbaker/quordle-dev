@@ -39,14 +39,15 @@ const GameShare: Component<GameShareProps> = (props) => {
   );
 
   return (
-    <div class="flex flex-col rounded-t-lg text-center bg-gray-900 border-t-2 p-4 border-gray-800">
+    <div class="flex flex-col rounded-t-lg text-center bg-gray-300 dark:bg-gray-900 border-t-2 p-4 border-white dark:border-gray-800">
       <div class="text-2xl flex">
         <div class="flex flex-1 justify-end items-center">
           <span
             class="mr-4"
             classList={{
-              "text-green-500": gamesData[props.mode].answersCorrect[0] >= 0,
-              "text-red-500": gamesData[props.mode].answersCorrect[0] < 0,
+              "text-green-600 dark:text-green-500":
+                gamesData[props.mode].answersCorrect[0] >= 0,
+              "text-rose-600": gamesData[props.mode].answersCorrect[0] < 0,
             }}
           >
             {gamesData[props.mode].answers[0].toLocaleUpperCase()}
@@ -62,8 +63,9 @@ const GameShare: Component<GameShareProps> = (props) => {
           <span
             class="ml-4"
             classList={{
-              "text-green-500": gamesData[props.mode].answersCorrect[1] >= 0,
-              "text-red-500": gamesData[props.mode].answersCorrect[1] < 0,
+              "text-green-600 dark:text-green-500":
+                gamesData[props.mode].answersCorrect[1] >= 0,
+              "text-rose-600": gamesData[props.mode].answersCorrect[1] < 0,
             }}
           >
             {gamesData[props.mode].answers[1].toLocaleUpperCase()}
@@ -75,8 +77,9 @@ const GameShare: Component<GameShareProps> = (props) => {
           <span
             class="mr-4"
             classList={{
-              "text-green-500": gamesData[props.mode].answersCorrect[2] >= 0,
-              "text-red-500": gamesData[props.mode].answersCorrect[2] < 0,
+              "text-green-600 dark:text-green-500":
+                gamesData[props.mode].answersCorrect[2] >= 0,
+              "text-rose-600": gamesData[props.mode].answersCorrect[2] < 0,
             }}
           >
             {gamesData[props.mode].answers[2].toLocaleUpperCase()}
@@ -92,8 +95,9 @@ const GameShare: Component<GameShareProps> = (props) => {
           <span
             class="ml-4"
             classList={{
-              "text-green-500": gamesData[props.mode].answersCorrect[3] >= 0,
-              "text-red-500": gamesData[props.mode].answersCorrect[3] < 0,
+              "text-green-600 dark:text-green-500":
+                gamesData[props.mode].answersCorrect[3] >= 0,
+              "text-rose-600": gamesData[props.mode].answersCorrect[3] < 0,
             }}
           >
             {gamesData[props.mode].answers[3].toLocaleUpperCase()}
@@ -166,7 +170,7 @@ const GameShare: Component<GameShareProps> = (props) => {
         </div>
       )}
       <textarea
-        class="font-[Courier] w-[100%] text-sm bg-gray-900 text-center rounded-t-lg mt-2"
+        class="font-[Courier] w-[100%] text-sm text-black dark:text-white bg-white dark:bg-gray-800 text-center rounded-lg mt-2 resize-none"
         classList={{
           "absolute top-[100%]": !showTextArea(),
         }}

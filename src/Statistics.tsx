@@ -68,7 +68,7 @@ const Statistics: Component<StatisticsProps> = (props) => {
       <div class="max-w-[550px] w-full m-auto flex flex-row-reverse pr-4 pt-2">
         <button
           type="button"
-          class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white"
+          class="bg-white dark:bg-gray-800 p-1 rounded-full text-gray-900 hover:text-black dark:text-gray-400 dark:hover:text-white"
           onClick={props.onCloseStatistics}
         >
           <svg
@@ -87,14 +87,16 @@ const Statistics: Component<StatisticsProps> = (props) => {
           </svg>
         </button>
       </div>
-      <div class="max-w-[550px] m-auto w-full px-6">
+      <div class="max-w-[550px] m-auto w-full px-6 mb-8">
         <div class="text-4xl mt-2 mb-4 text-center">
           {props.mode === "daily" ? "Daily" : "Practice"} Statistics
         </div>
         <div class="flex flex-row">
           <div class="flex flex-col text-center flex-1">
             <span class="text-xl">{numWins() + numLosses()}</span>
-            <span class="text-base text-gray-300">Played</span>
+            <span class="text-base text-gray-600 dark:text-gray-300">
+              Played
+            </span>
           </div>
           <div class="flex flex-col text-center flex-1">
             <span class="text-xl">
@@ -102,11 +104,13 @@ const Statistics: Component<StatisticsProps> = (props) => {
                 (totalGames() > 0 ? numWins() / totalGames() : 0) * 100
               )}
             </span>
-            <span class="text-base text-gray-300">Win %</span>
+            <span class="text-base text-gray-600 dark:text-gray-300">
+              Win %
+            </span>
           </div>
           <div class="flex flex-col text-center flex-1">
             <span class="text-xl">{gamesData[props.mode].currentStreak}</span>
-            <span class="text-base text-gray-300">
+            <span class="text-base text-gray-600 dark:text-gray-300">
               Current
               <br />
               Streak
@@ -114,7 +118,7 @@ const Statistics: Component<StatisticsProps> = (props) => {
           </div>
           <div class="flex flex-col text-center flex-1">
             <span class="text-xl">{gamesData[props.mode].maxStreak}</span>
-            <span class="text-base text-gray-300">
+            <span class="text-base text-gray-600 dark:text-gray-300">
               Max
               <br />
               Streak
@@ -132,9 +136,9 @@ const Statistics: Component<StatisticsProps> = (props) => {
               <div
                 class="min-w-min text-right px-2"
                 classList={{
-                  "bg-box-correct text-black":
+                  " text-black bg-box-correct":
                     currentGameWin() && currentGameMaxCorrect() === i,
-                  "bg-gray-700 text-white": !(
+                  "text-black bg-gray-300 dark:text-white dark:bg-gray-700": !(
                     currentGameWin() && currentGameMaxCorrect() === i
                   ),
                 }}
@@ -156,7 +160,7 @@ const Statistics: Component<StatisticsProps> = (props) => {
               <div class="flex-1 text-right">{numLosses()} - Loss</div>
             </div>
             <div
-              class="text-black text-base font-bold flex flex-row items-center cursor-pointer rounded-l-xl rounded-r-xl overflow-hidden"
+              class="text-base font-bold flex flex-row items-center cursor-pointer rounded-l-xl rounded-r-xl overflow-hidden"
               onClick={() => setLossDistributionOpen(!lossDistributionOpen())}
             >
               <div
@@ -164,7 +168,7 @@ const Statistics: Component<StatisticsProps> = (props) => {
                 style={{ width: (numWins() / totalGames()) * 100 + "%" }}
               />
               <div
-                class="bg-rose-900 text-right h-6"
+                class="bg-rose-600 dark:bg-rose-800 text-right h-6"
                 style={{ width: (numLosses() / totalGames()) * 100 + "%" }}
               />
             </div>
@@ -181,13 +185,14 @@ const Statistics: Component<StatisticsProps> = (props) => {
                   <div
                     class="min-w-min text-right px-2"
                     classList={{
-                      "bg-rose-900":
+                      "text-white bg-rose-600 dark:bg-rose-800":
                         currentGameLoss() &&
                         currentGameNumCorrect() === i - GAME_ROWS,
-                      "bg-gray-700": !(
-                        currentGameLoss() &&
-                        currentGameNumCorrect() === i - GAME_ROWS
-                      ),
+                      "text-black bg-gray-300 dark:bg-gray-700 dark:text-white":
+                        !(
+                          currentGameLoss() &&
+                          currentGameNumCorrect() === i - GAME_ROWS
+                        ),
                     }}
                     style={{
                       width:

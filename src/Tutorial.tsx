@@ -40,7 +40,7 @@ const Tutorial: Component<TutorialProps> = (props) => {
       <div class="max-w-[550px] w-full m-auto flex flex-row-reverse pr-4 pt-2">
         <button
           type="button"
-          class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white"
+          class="bg-white dark:bg-gray-800 p-1 rounded-full text-gray-900 hover:text-black dark:text-gray-400 dark:hover:text-white"
           onClick={props.onCloseTutorial}
         >
           <svg

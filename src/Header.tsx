@@ -17,10 +17,10 @@ const Header: Component<HeaderProps> = (props) => {
   });
 
   return (
-    <nav class="bg-gray-900 w-screen border-b-2 border-gray-800">
+    <nav class=" bg-gray-300 dark:bg-gray-900 w-screen border-b-2 border-white dark:border-gray-800">
       <div class="flex items-center max-w-[550px] m-auto px-4 py-2">
         <img src={favicon48} width="24" height="24" />
-        <span class="ml-3">Quordle</span>
+        <span class="ml-3 text-black dark:text-white">Quordle</span>
         <div class="flex-1">
           <div class="">
             <div class="flex ml-3">
@@ -48,14 +48,14 @@ const Header: Component<HeaderProps> = (props) => {
         <div class="flex items-center sm:inset-auto sm:ml-6">
           <button
             type="button"
-            class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white"
+            class="bg-gray-400 dark:bg-gray-800 p-1 rounded-full text-gray-700 hover:text-black dark:text-gray-400 dark:hover:text-white"
             onClick={props.onOpenStatistics}
           >
             <StatisticsIcon />
           </button>
           <button
             type="button"
-            class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white ml-2"
+            class="bg-gray-400 dark:bg-gray-800 p-1 rounded-full text-gray-700 hover:text-black dark:text-gray-400 dark:hover:text-white ml-2"
             onClick={props.onOpenTutorial}
           >
             <HelpIcon />

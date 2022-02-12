@@ -142,7 +142,7 @@ const Game: Component<GameProps> = (props) => {
         )}
       </div>
       <div
-        class="absolute w-full h-full bg-gray-800 overflow-auto transition-all ease-in-out duration-500"
+        class="absolute w-full h-full text-black dark:text-white bg-white dark:bg-gray-800 overflow-auto transition-all ease-in-out duration-500"
         classList={{
           "opacity-100 top-0": statisticsOpen(),
           "opacity-0 top-[100%]": !statisticsOpen(),
@@ -160,7 +160,7 @@ const Game: Component<GameProps> = (props) => {
         />
       </div>
       <div
-        class="absolute w-full h-full bg-gray-800 overflow-auto transition-all ease-in-out duration-500"
+        class="absolute w-full h-full text-black dark:text-white bg-white dark:bg-gray-800 overflow-auto transition-all ease-in-out duration-500"
         classList={{
           "opacity-100 top-0": tutorialOpen(),
           "opacity-0 top-[100%]": !tutorialOpen(),
