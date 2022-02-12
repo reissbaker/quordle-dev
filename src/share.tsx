@@ -80,11 +80,10 @@ function roundRect(
   ctx.fill();
 }
 
-export const shareGame = async (
+export const getShareText = (
   mode: GameMode,
-  gameData: DeepReadonly<GameData>,
-  shareType: ShareType
-) => {
+  gameData: DeepReadonly<GameData>
+): [string, string] => {
   let textShare = "";
   if (mode === "daily") {
     textShare =
@@ -141,6 +140,15 @@ export const shareGame = async (
       getEmojiRow(gameData.states[3][i]) +
       "\n";
   }
+  return [textShare, textMobileShare];
+};
+
+export const shareGame = async (
+  mode: GameMode,
+  gameData: DeepReadonly<GameData>,
+  shareType: ShareType
+) => {
+  const [textShare, textMobileShare] = getShareText(mode, gameData);
 
   gtagWrap("event", "share", {
     mode: mode,
@@ -150,6 +158,7 @@ export const shareGame = async (
 
   if (shareType === "clipboard") {
     navigator.clipboard.writeText(textShare).catch((e) => console.error(e));
+    alert("Copied results to clipboard!");
   } else if (shareType === "share") {
     navigator
       .share({
@@ -164,6 +173,15 @@ export const shareGame = async (
     }
     const canvas = document.createElement("canvas");
     canvas.style.display = "none";
+
+    let l1 = GAME_ROWS - 1;
+    if (gameData.answersCorrect[0] >= 0 && gameData.answersCorrect[1] >= 0) {
+      l1 = Math.max(gameData.answersCorrect[0], gameData.answersCorrect[1]);
+    }
+    let l2 = GAME_ROWS - 1;
+    if (gameData.answersCorrect[2] >= 0 && gameData.answersCorrect[3] >= 0) {
+      l2 = Math.max(gameData.answersCorrect[2], gameData.answersCorrect[3]);
+    }
 
     const size = 64;
     const padding = size / 16;

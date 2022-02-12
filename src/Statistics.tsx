@@ -156,15 +156,15 @@ const Statistics: Component<StatisticsProps> = (props) => {
               <div class="flex-1 text-right">{numLosses()} - Loss</div>
             </div>
             <div
-              class="text-black text-base font-bold flex flex-row items-center cursor-pointer"
+              class="text-black text-base font-bold flex flex-row items-center cursor-pointer rounded-l-xl rounded-r-xl overflow-hidden"
               onClick={() => setLossDistributionOpen(!lossDistributionOpen())}
             >
               <div
-                class="bg-box-correct h-6 rounded-l-xl"
+                class="bg-box-correct h-6"
                 style={{ width: (numWins() / totalGames()) * 100 + "%" }}
               />
               <div
-                class="bg-rose-900 text-right h-6 rounded-r-xl"
+                class="bg-rose-900 text-right h-6"
                 style={{ width: (numLosses() / totalGames()) * 100 + "%" }}
               />
             </div>
