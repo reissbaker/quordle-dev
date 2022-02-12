@@ -149,7 +149,7 @@ export const shareGame = async (
   });
 
   if (shareType === "clipboard") {
-    navigator.clipboard.writeText(textShare);
+    navigator.clipboard.writeText(textShare).catch((e) => console.error(e));
   } else if (shareType === "share") {
     navigator
       .share({
@@ -158,7 +158,9 @@ export const shareGame = async (
       .catch((e) => console.error(e));
   } else if (shareType === "image") {
     if (navigator.clipboard) {
-      navigator.clipboard.writeText(textMobileShare);
+      navigator.clipboard
+        .writeText(textMobileShare)
+        .catch((e) => console.error(e));
     }
     const canvas = document.createElement("canvas");
     canvas.style.display = "none";
