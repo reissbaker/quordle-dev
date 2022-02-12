@@ -65,7 +65,7 @@ const Statistics: Component<StatisticsProps> = (props) => {
 
   return (
     <div class="w-full h-full overflow-auto">
-      <div class="w-full flex flex-row-reverse pr-4 pt-2">
+      <div class="max-w-[550px] w-full m-auto flex flex-row-reverse pr-4 pt-2">
         <button
           type="button"
           class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white"

@@ -157,8 +157,14 @@ export const shareGame = async (
   });
 
   if (shareType === "clipboard") {
-    navigator.clipboard.writeText(textShare).catch((e) => console.error(e));
-    alert("Copied results to clipboard!");
+    // Deprecated in favor of document.execCommand("copy") method
+    navigator.clipboard
+      .writeText(textShare)
+      .then(() => alert("Copied results to clipboard!"))
+      .catch((e) => {
+        console.error(e);
+        alert("Error copying results to clipboard!");
+      });
   } else if (shareType === "share") {
     navigator
       .share({
@@ -166,11 +172,6 @@ export const shareGame = async (
       })
       .catch((e) => console.error(e));
   } else if (shareType === "image") {
-    if (navigator.clipboard) {
-      navigator.clipboard
-        .writeText(textMobileShare)
-        .catch((e) => console.error(e));
-    }
     const canvas = document.createElement("canvas");
     canvas.style.display = "none";
 
