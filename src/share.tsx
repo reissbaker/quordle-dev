@@ -151,9 +151,11 @@ export const shareGame = async (
   if (shareType === "clipboard") {
     navigator.clipboard.writeText(textShare);
   } else if (shareType === "share") {
-    navigator.share({
-      text: textShare,
-    });
+    navigator
+      .share({
+        text: textShare,
+      })
+      .catch((e) => console.error(e));
   } else if (shareType === "image") {
     if (navigator.clipboard) {
       navigator.clipboard.writeText(textMobileShare);
@@ -331,9 +333,11 @@ export const shareGame = async (
 
     if (!blob) return;
     const file = new File([blob], "quordle.png", { type: "image/png" });
-    navigator.share({
-      files: [file],
-      text: textMobileShare,
-    });
+    navigator
+      .share({
+        files: [file],
+        text: textMobileShare,
+      })
+      .catch((e) => console.error(e));
   }
 };
