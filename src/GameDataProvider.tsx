@@ -220,6 +220,10 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
           state[mode].guesses.join(",")
         );
         window.localStorage.setItem(
+          mode + "_history",
+          state[mode].history.join(",")
+        );
+        window.localStorage.setItem(
           mode + "_current_streak",
           String(state[mode].currentStreak)
         );
