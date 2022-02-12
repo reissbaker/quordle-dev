@@ -94,7 +94,7 @@ const Statistics: Component<StatisticsProps> = (props) => {
         <div class="flex flex-row">
           <div class="flex flex-col text-center flex-1">
             <span class="text-xl">{numWins() + numLosses()}</span>
-            <span class="text-base">Played</span>
+            <span class="text-base text-gray-300">Played</span>
           </div>
           <div class="flex flex-col text-center flex-1">
             <span class="text-xl">
@@ -102,11 +102,11 @@ const Statistics: Component<StatisticsProps> = (props) => {
                 (totalGames() > 0 ? numWins() / totalGames() : 0) * 100
               )}
             </span>
-            <span class="text-base">Win %</span>
+            <span class="text-base text-gray-300">Win %</span>
           </div>
           <div class="flex flex-col text-center flex-1">
             <span class="text-xl">{gamesData[props.mode].currentStreak}</span>
-            <span class="text-base">
+            <span class="text-base text-gray-300">
               Current
               <br />
               Streak
@@ -114,7 +114,7 @@ const Statistics: Component<StatisticsProps> = (props) => {
           </div>
           <div class="flex flex-col text-center flex-1">
             <span class="text-xl">{gamesData[props.mode].maxStreak}</span>
-            <span class="text-base">
+            <span class="text-base text-gray-300">
               Max
               <br />
               Streak
@@ -130,10 +130,13 @@ const Statistics: Component<StatisticsProps> = (props) => {
             <div class="flex flex-row mb-1">
               <div class="mr-2">{i + 1}</div>
               <div
-                class="min-w-min text-right text-white bg-gray-900 px-2"
+                class="min-w-min text-right px-2"
                 classList={{
                   "bg-box-correct text-black":
                     currentGameWin() && currentGameMaxCorrect() === i,
+                  "bg-gray-700 text-white": !(
+                    currentGameWin() && currentGameMaxCorrect() === i
+                  ),
                 }}
                 style={{
                   width:
@@ -157,11 +160,11 @@ const Statistics: Component<StatisticsProps> = (props) => {
               onClick={() => setLossDistributionOpen(!lossDistributionOpen())}
             >
               <div
-                class="bg-box-correct h-6 rounded-l-xl min-w-fit"
+                class="bg-box-correct h-6 rounded-l-xl"
                 style={{ width: (numWins() / totalGames()) * 100 + "%" }}
               />
               <div
-                class="bg-rose-900 text-right h-6 rounded-r-xl min-w-fit"
+                class="bg-rose-900 text-right h-6 rounded-r-xl"
                 style={{ width: (numLosses() / totalGames()) * 100 + "%" }}
               />
             </div>
@@ -176,11 +179,15 @@ const Statistics: Component<StatisticsProps> = (props) => {
                 <div class="flex flex-row mb-1">
                   <div class="mr-2">{NUM_GAMES - (i - GAME_ROWS)}</div>
                   <div
-                    class="min-w-min text-right bg-gray-900 px-2"
+                    class="min-w-min text-right px-2"
                     classList={{
                       "bg-rose-900":
                         currentGameLoss() &&
                         currentGameNumCorrect() === i - GAME_ROWS,
+                      "bg-gray-700": !(
+                        currentGameLoss() &&
+                        currentGameNumCorrect() === i - GAME_ROWS
+                      ),
                     }}
                     style={{
                       width:
