@@ -28,6 +28,14 @@ export const vibrate = () => {
   }
 };
 
+export const padNumber = (n: number, width: number, z?: string) => {
+  z = z || "0";
+  const nStr = n + "";
+  return nStr.length >= width
+    ? nStr
+    : new Array(width - nStr.length + 1).join(z) + nStr;
+};
+
 export const timeUntil = (date1: Date, date2: Date) => {
   if ("RelativeTimeFormat" in Intl) {
     // @ts-ignore

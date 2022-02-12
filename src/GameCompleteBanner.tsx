@@ -3,7 +3,22 @@ import { GAME_PERIOD_MS, START_DATE } from "./constants";
 import { useGamesDataContext } from "./GameDataProvider";
 import { PlusIcon } from "./icons";
 import { GameMode } from "./types";
-import { timeUntil, vibrate } from "./utils";
+import { padNumber, timeUntil, vibrate } from "./utils";
+
+const timeBetween = (date1: Date, date2: Date) => {
+  let delta = Math.floor(Math.abs(date2.getTime() - date1.getTime()) / 1000);
+
+  if (delta >= 3600) {
+    return timeUntil(date1, date2);
+  }
+
+  const minutes = Math.floor(delta / 60) % 60;
+  delta -= minutes * 60;
+
+  const seconds = delta % 60;
+
+  return `in ${padNumber(minutes, 2)}m ${padNumber(seconds, 2)}s`;
+};
 
 type NewGameButtonProps = {
   onClick?: JSX.EventHandlerUnion<HTMLButtonElement, MouseEvent>;
@@ -75,7 +90,7 @@ const GameCompleteBanner: Component<GameCompleteBannerProps> = (props) => {
           </div>
         </NewGameButton>
       ) : (
-        <div>Next Daily {timeUntil(currentDate(), nextDailyTime())}</div>
+        <div>Next Daily {timeBetween(currentDate(), nextDailyTime())}</div>
       )}
     </div>
   );
