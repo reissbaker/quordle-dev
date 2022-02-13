@@ -49,10 +49,13 @@ export const IS_IN_WEB_APP_CHROME = window.matchMedia(
 
 export const CAN_SHARE_TEXT =
   // @ts-ignore
-  navigator.share && navigator.canShare({ text: "test share text" });
+  navigator.share &&
+  navigator.canShare &&
+  navigator.canShare({ text: "test share text" });
 export const CAN_SHARE_IMAGE =
   // @ts-ignore
   navigator.share &&
+  navigator.canShare &&
   navigator.canShare({
     text: "test share text",
     files: [new File([new Blob()], "test.png", { type: "image/png" })],
