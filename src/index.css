@@ -23,6 +23,15 @@ code {
   background-repeat: no-repeat;
 }
 
+@keyframes color-fade {
+  from {
+    background-color: #fff;
+  }
+  to {
+    background-color: #bbb;
+  }
+}
+
 @layer components {
   body {
     @apply bg-white dark:bg-gray-800;
@@ -50,4 +59,11 @@ code {
       @apply bg-gray-500;
     }
   }
+}
+
+.quordle-heartbeat-anim {
+  animation-name: color-fade;
+  animation-duration: 600ms;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
