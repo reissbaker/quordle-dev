@@ -28,4 +28,4 @@ export type GamesDataProviderFuncs = {
   resetFree(): void;
 };
 export type BoxState = "correct" | "diff" | "none";
-export type ShareType = "share" | "image" | "clipboard";
+export type ShareType = "share" | "image" | "image_save" | "clipboard";

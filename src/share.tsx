@@ -1,3 +1,4 @@
+import fileSaver from "file-saver";
 import { DeepReadonly } from "solid-js/store";
 import { GAME_COLS, GAME_ROWS } from "./constants";
 import { BoxState, GameData, GameMode, ShareType } from "./types";
@@ -171,7 +172,7 @@ export const shareGame = async (
         text: textShare,
       })
       .catch((e) => console.error(e));
-  } else if (shareType === "image") {
+  } else if (shareType === "image" || shareType === "image_save") {
     const canvas = document.createElement("canvas");
     canvas.style.display = "none";
 
@@ -353,12 +354,20 @@ export const shareGame = async (
     );
 
     if (!blob) return;
-    const file = new File([blob], "quordle.png", { type: "image/png" });
-    navigator
-      .share({
-        files: [file],
-        text: textMobileShare,
-      })
-      .catch((e) => console.error(e));
+    const filename = `quordle-${mode === "daily" ? "daily" : "practice"}-${
+      gameData.seed
+    }.png`;
+    const file = new File([blob], filename, { type: "image/png" });
+
+    if (shareType === "image") {
+      navigator
+        .share({
+          files: [file],
+          text: textMobileShare,
+        })
+        .catch((e) => console.error(e));
+    } else if (shareType === "image_save") {
+      fileSaver.saveAs(file, filename);
+    }
   }
 };

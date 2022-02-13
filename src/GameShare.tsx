@@ -1,7 +1,7 @@
 import { Component, createMemo, createSignal, JSX } from "solid-js";
 import { CAN_SHARE_IMAGE, CAN_SHARE_TEXT } from "./constants";
 import { useGamesDataContext } from "./GameDataProvider";
-import { ClipboardCopyIcon, ShareIcon, TwitterIcon } from "./icons";
+import { ClipboardCopyIcon, SaveIcon, ShareIcon, TwitterIcon } from "./icons";
 import { getNumEmoji, getShareText, shareGame } from "./share";
 import { GameMode } from "./types";
 import { gtagWrap, vibrate } from "./utils";
@@ -118,7 +118,7 @@ const GameShare: Component<GameShareProps> = (props) => {
                 <div class="ml-2">Share</div>
               </div>
             </ShareButton>
-            {CAN_SHARE_IMAGE && (
+            {CAN_SHARE_IMAGE ? (
               <ShareButton
                 class="ml-2"
                 onClick={() => {
@@ -129,6 +129,19 @@ const GameShare: Component<GameShareProps> = (props) => {
                 <div class="flex items-center justify-center">
                   <TwitterIcon />
                   <div class="ml-2">Share as Image</div>
+                </div>
+              </ShareButton>
+            ) : (
+              <ShareButton
+                class="ml-2"
+                onClick={() => {
+                  vibrate();
+                  shareGame(props.mode, gamesData[props.mode], "image_save");
+                }}
+              >
+                <div class="flex items-center justify-center">
+                  <SaveIcon />
+                  <div class="ml-2">Save as Image</div>
                 </div>
               </ShareButton>
             )}
