@@ -57,8 +57,6 @@ const Key: Component<KeyProps> = (props) => {
               keyColors[c] !== colorOptions.correct
             ) {
               keyColors[c] = colorOptions.diff;
-            } else {
-              keyColors[c] = colorOptions.none;
             }
           }
         }

@@ -353,7 +353,7 @@ const GamesDataProvider: Component<GamesDataProviderProps> = (props) => {
         } else if (e.key === "Enter") {
           submitCurrent(mode);
         } else {
-          const key = e.key.toLowerCase();
+          const key = e.key.toLocaleLowerCase();
           if (ALPHABET.indexOf(key) == -1) return;
           addLetter(mode, key);
         }
