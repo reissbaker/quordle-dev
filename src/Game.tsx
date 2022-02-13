@@ -1,4 +1,3 @@
-import createResizeObserver from "@solid-primitives/resize-observer";
 import { useSearchParams } from "solid-app-router";
 import { Component, createMemo, createSignal, onCleanup } from "solid-js";
 import {
@@ -14,10 +13,20 @@ import GameShare from "./GameShare";
 import GameSquare from "./GameTile";
 import Header from "./Header";
 import Keyboard from "./Keyboard";
+import { createResizeObserverPoly } from "./ResizeObserverPoly";
 import Statistics from "./Statistics";
 import Tutorial from "./Tutorial";
 import { GameMode } from "./types";
 import { gtagWrap, vibrate } from "./utils";
+
+/**
+ * Create resize observer is a helper primitive for binding resize events.
+ *
+ * @param opts.refs - Either an `Element`, an array of `Element`s, or a signal returning one of these.
+ * @param opts.onResize - Function handler to trigger on resize
+ * @return A callback that can be used to add refs to observe resizing
+ *
+ */
 
 const NUM_GAMES_X_ARR = [...Array(NUM_GAMES_X).keys()];
 const NUM_GAMES_Y_ARR = [...Array(NUM_GAMES_Y).keys()];
@@ -70,8 +79,12 @@ const Game: Component<GameProps> = (props) => {
     () => searchParams.overlay === "statistics"
   );
 
-  const refCallback = createResizeObserver({
-    onResize: ({ width }) => setFontSize(width / 15),
+  const refCallback = createResizeObserverPoly({
+    onResize: ({ width }) => {
+      if (width) {
+        setFontSize(width / 15);
+      }
+    },
   });
 
   return (
