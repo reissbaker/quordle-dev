@@ -202,7 +202,7 @@ const Tutorial: Component<TutorialProps> = (props) => {
           players daily and has had over 160k total players.
           <br />
           <br />
-          A shoutout to our friend that plays relentless while indoor cycling.
+          A shoutout to our friend that plays relentlessly while indoor cycling.
           You were the drive to create a better version and your passion made me
           realize it could be popular outside of our friend group. I am so glad
           the world has been thoroughly cursed by Quordle and can't wait to see
