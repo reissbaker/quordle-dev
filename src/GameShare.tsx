@@ -104,50 +104,48 @@ const GameShare: Component<GameShareProps> = (props) => {
           </span>
         </div>
       </div>
-      {CAN_SHARE_TEXT && (
-        <>
-          <div class="flex items-center justify-center mt-2">
-            <ShareButton
-              onClick={() => {
-                vibrate();
-                shareGame(props.mode, gamesData[props.mode], "share");
-              }}
-            >
-              <div class="flex items-center justify-center">
-                <ShareIcon />
-                <div class="ml-2">Share</div>
-              </div>
-            </ShareButton>
-            {CAN_SHARE_IMAGE ? (
-              <ShareButton
-                class="ml-2"
-                onClick={() => {
-                  vibrate();
-                  shareGame(props.mode, gamesData[props.mode], "image");
-                }}
-              >
-                <div class="flex items-center justify-center">
-                  <TwitterIcon />
-                  <div class="ml-2">Share as Image</div>
-                </div>
-              </ShareButton>
-            ) : (
-              <ShareButton
-                class="ml-2"
-                onClick={() => {
-                  vibrate();
-                  shareGame(props.mode, gamesData[props.mode], "image_save");
-                }}
-              >
-                <div class="flex items-center justify-center">
-                  <SaveIcon />
-                  <div class="ml-2">Save as Image</div>
-                </div>
-              </ShareButton>
-            )}
-          </div>
-        </>
-      )}
+      <div class="flex items-center justify-center mt-2">
+        {CAN_SHARE_TEXT && (
+          <ShareButton
+            onClick={() => {
+              vibrate();
+              shareGame(props.mode, gamesData[props.mode], "share");
+            }}
+          >
+            <div class="flex items-center justify-center">
+              <ShareIcon />
+              <div class="ml-2">Share</div>
+            </div>
+          </ShareButton>
+        )}
+        {CAN_SHARE_IMAGE ? (
+          <ShareButton
+            class="ml-2"
+            onClick={() => {
+              vibrate();
+              shareGame(props.mode, gamesData[props.mode], "image");
+            }}
+          >
+            <div class="flex items-center justify-center">
+              <TwitterIcon />
+              <div class="ml-2">Share as Image</div>
+            </div>
+          </ShareButton>
+        ) : (
+          <ShareButton
+            class="ml-2"
+            onClick={() => {
+              vibrate();
+              shareGame(props.mode, gamesData[props.mode], "image_save");
+            }}
+          >
+            <div class="flex items-center justify-center">
+              <SaveIcon />
+              <div class="ml-2">Save as Image</div>
+            </div>
+          </ShareButton>
+        )}
+      </div>
       {textAreaRef() && (
         <div class="flex items-center justify-center mt-2">
           <ShareButton
