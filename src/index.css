@@ -23,17 +23,15 @@ code {
   background-repeat: no-repeat;
 }
 
-
-
 @layer components {
   body {
     @apply bg-white dark:bg-gray-800;
   }
   .quordle-nav {
-    @apply text-gray-700 hover:bg-gray-400 hover:text-black dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium ml-3;
+    @apply text-gray-700 hover:bg-indigo-400 hover:text-white dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium ml-3;
   }
   .quordle-nav-active {
-    @apply bg-gray-400 text-black hover:bg-gray-400 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white !important;
+    @apply bg-indigo-400 text-white hover:bg-indigo-400 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white !important;
   }
   .quordle-box {
     @apply m-0.5 rounded p-0 relative select-none;
@@ -52,7 +50,16 @@ code {
       @apply bg-gray-500;
     }
   }
-  @keyframes color-fade {
+
+  @keyframes light-color-fade {
+    from {
+      @apply bg-slate-200;
+    }
+    to {
+      @apply bg-slate-300;
+    }
+  }
+  @keyframes dark-color-fade {
     from {
       @apply bg-gray-300;
     }
@@ -60,24 +67,21 @@ code {
       @apply bg-gray-400;
     }
   }
-  @keyframes color-fade-dark {
-    from {
-      @apply bg-gray-600;
-    }
-    to {
-      @apply bg-gray-500;
-    }
-  }
+}
+
+.quordle-heartbeat-anim {
+  animation-name: light-color-fade;
+  animation-duration: 1100ms;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* Dark color anim both for class and media based color schemes */
+.dark .quordle-heartbeat-anim {
+  animation-name: dark-color-fade;
+}
+@media(prefers-color-scheme:dark) {
   .quordle-heartbeat-anim {
-    animation-name: color-fade;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-  }
-  .quordle-heartbeat-anim-dark {
-    animation-name: color-fade-dark;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+    animation-name: dark-color-fade;
   }
 }

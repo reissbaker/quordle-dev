@@ -27,7 +27,7 @@ const Header: Component<HeaderProps> = (props) => {
   const [btnEl, setBtnEl] = createSignal<HTMLButtonElement>();
 
   return (
-    <nav class="bg-gray-300 dark:bg-gray-900 w-screen border-b-2 border-white dark:border-gray-800">
+    <nav class="bg-slate-300 dark:bg-gray-900 w-screen border-b-2 border-white dark:border-gray-800">
       <div class="flex items-center max-w-[550px] m-auto px-4 py-2 relative">
         <LogoIcon colorblind={gamesData.colorblind} />
         <span class="ml-3 text-black dark:text-white">Quordle</span>
@@ -58,14 +58,14 @@ const Header: Component<HeaderProps> = (props) => {
         <div class="flex items-center sm:inset-auto sm:ml-6">
           <button
             type="button"
-            class="bg-gray-400 dark:bg-gray-800 p-1 rounded-full text-gray-700 hover:text-black dark:text-gray-400 dark:hover:text-white ml-2"
+            class="bg-indigo-400 dark:bg-gray-800 p-1 rounded-full text-gray-700 hover:text-black dark:text-gray-400 dark:hover:text-white ml-2"
             onClick={props.onOpenTutorial}
           >
             <HelpIcon />
           </button>
           <button
             type="button"
-            class="bg-gray-400 dark:bg-gray-800 p-1 rounded-full text-gray-700 hover:text-black dark:text-gray-400 dark:hover:text-white ml-2"
+            class="bg-indigo-400 dark:bg-gray-800 p-1 rounded-full text-gray-700 hover:text-black dark:text-gray-400 dark:hover:text-white ml-2"
             ref={(ref) => setBtnEl(ref)}
             onClick={() => vibrate(gamesData.vibration)}
           >

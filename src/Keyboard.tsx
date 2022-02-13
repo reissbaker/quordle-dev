@@ -77,7 +77,7 @@ const Key: Component<KeyProps> = (props) => {
 
   return (
     <button
-      class="quordle-key bg-zinc-300 dark:bg-zinc-600 w-[10%] pb-[calc(10%-0.25rem)]"
+      class="quordle-key bg-slate-300 dark:bg-zinc-600 w-[10%] pb-[calc(10%-0.25rem)]"
       classList={{
         "rounded-b-none": props.key === "enter3",
         "ml-0 mt-0 rounded-t-none rounded-l-none": props.key === "enter2",
