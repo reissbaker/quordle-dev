@@ -25,7 +25,7 @@ code {
 
 @keyframes color-fade {
   from {
-    background-color: #fff;
+    background-color: #ddd;
   }
   to {
     background-color: #bbb;
