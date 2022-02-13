@@ -16,7 +16,7 @@ type GameTileRendererProps = {
 export const GameTileRenderer: Component<GameTileRendererProps> = (props) => {
   return (
     <div
-      class="quordle-box w-[20%] pb-[calc(20%-0.35rem)]"
+      class="quordle-box w-[20%] pb-[calc(20%-0.25rem)]"
       classList={{
         "bg-box-correct": props.state === "correct",
         "bg-box-diff": props.state === "diff",
