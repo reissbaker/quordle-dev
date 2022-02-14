@@ -357,6 +357,8 @@ const GamesDataProvider: Component<GamesDataProviderProps> = (props) => {
               });
             }
           }
+        } else {
+          s[mode].current = "";
         }
       })
     );
