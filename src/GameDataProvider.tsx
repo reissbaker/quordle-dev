@@ -12,6 +12,7 @@ import {
   ALPHABET,
   ANSWERS,
   ANSWERS_SET,
+  BLACKLIST_SET,
   GAME_COLS,
   GAME_PERIOD_MS,
   GAME_ROWS,
@@ -95,12 +96,16 @@ export const generateWordsFromSeed = (seed: number): string[] => {
       ANSWERS[rnd.random_int31() % ANSWERS.length],
     ];
   } while (
-    answers[0] == answers[1] ||
-    answers[0] == answers[2] ||
-    answers[0] == answers[3] ||
-    answers[1] == answers[2] ||
-    answers[1] == answers[3] ||
-    answers[2] == answers[3]
+    answers[0] === answers[1] ||
+    answers[0] === answers[2] ||
+    answers[0] === answers[3] ||
+    answers[1] === answers[2] ||
+    answers[1] === answers[3] ||
+    answers[2] === answers[3] ||
+    BLACKLIST_SET.has(answers[0]) ||
+    BLACKLIST_SET.has(answers[1]) ||
+    BLACKLIST_SET.has(answers[2]) ||
+    BLACKLIST_SET.has(answers[3])
   );
   return answers;
 };

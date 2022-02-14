@@ -14,7 +14,7 @@ const ShareButton: Component<ShareButtonsProps> = (props) => {
   return (
     <button
       type="button"
-      class={`text-lg min-h-[50px] text-white bg-blue-800 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ${props.class}`}
+      class={`text-lg min-h-[50px] text-white bg-blue-800 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ${props.class}`}
       onClick={props.onClick}
     >
       {props.children}
@@ -119,18 +119,31 @@ const GameShare: Component<GameShareProps> = (props) => {
           </ShareButton>
         )}
         {CAN_SHARE_IMAGE ? (
-          <ShareButton
-            class="ml-2"
-            onClick={() => {
-              vibrate();
-              shareGame(props.mode, gamesData[props.mode], "image");
-            }}
-          >
-            <div class="flex items-center justify-center">
-              <TwitterIcon />
-              <div class="ml-2">Share as Image</div>
-            </div>
-          </ShareButton>
+          <div class="inline-flex" role="group">
+            <button
+              type="button"
+              class="ml-2 text-lg min-h-[50px] text-white bg-blue-800 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-l-lg px-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 border-r-[1px] border-gray-400"
+              onClick={() => {
+                vibrate();
+                shareGame(props.mode, gamesData[props.mode], "image");
+              }}
+            >
+              <div class="flex items-center justify-center">
+                <TwitterIcon />
+                <div class="ml-2">Share as Image</div>
+              </div>
+            </button>
+            <button
+              type="button"
+              class="text-lg min-h-[50px] text-white bg-blue-800 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-r-lg px-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              onClick={() => {
+                vibrate();
+                shareGame(props.mode, gamesData[props.mode], "image_save");
+              }}
+            >
+              <SaveIcon />
+            </button>
+          </div>
         ) : (
           <ShareButton
             class="ml-2"
