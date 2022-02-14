@@ -3,7 +3,13 @@ import Dismiss from "solid-dismiss";
 import { Component, createSignal } from "solid-js";
 import favicon48 from "./assets/favicon-48.png";
 import { useGamesDataContext } from "./GameDataProvider";
-import { ChevronDownIcon, DonateIcon, HelpIcon, StatisticsIcon } from "./icons";
+import {
+  ChevronDownIcon,
+  DonateIcon,
+  HelpIcon,
+  PatreonIcon,
+  StatisticsIcon,
+} from "./icons";
 import { GameMode } from "./types";
 import { vibrate } from "./utils";
 
@@ -66,12 +72,12 @@ const Header: Component<HeaderProps> = (props) => {
         </div>
         <Dismiss menuButton={btnEl} open={open} setOpen={setOpen}>
           <div
-            class="absolute bg-gray-100 dark:bg-gray-800 text-black dark:text-white z-20 right-4 rounded-lg border-2 border-gray-400"
+            class="absolute flex flex-col bg-gray-100 dark:bg-gray-800 text-black dark:text-white z-20 right-4 rounded-lg border-2 border-gray-400"
             style={{
               top: (btnEl()?.getBoundingClientRect().bottom || 0) + 12 + "px",
             }}
           >
-            <div class="flex items-center justify-center m-4">
+            <div class="flex items-center justify-end m-4">
               <label
                 for="toggleDarkMode"
                 class="flex items-center cursor-pointer"
@@ -100,7 +106,7 @@ const Header: Component<HeaderProps> = (props) => {
             </div>
             <button
               type="button"
-              class="flex flex-row-reverse items-center px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all w-full mb-4"
+              class="flex flex-row-reverse items-center px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all mb-4"
               onClick={() => {
                 setOpen(false);
                 props.onOpenStatistics();
@@ -113,7 +119,24 @@ const Header: Component<HeaderProps> = (props) => {
             </button>
             <button
               type="button"
-              class="px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all w-full mb-4"
+              class="px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all mb-4"
+              onClick={() => {
+                vibrate();
+                setOpen(false);
+              }}
+            >
+              <a
+                class="flex flex-row-reverse items-center "
+                href="https://www.buymeacoffee.com/quordle"
+                target="_blank"
+              >
+                <DonateIcon />
+                <div class="mr-3 text-black dark:text-white">Donate</div>
+              </a>
+            </button>
+            <button
+              type="button"
+              class="px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all mb-4"
               onClick={() => {
                 vibrate();
                 setOpen(false);
@@ -124,8 +147,8 @@ const Header: Component<HeaderProps> = (props) => {
                 href="https://www.patreon.com/quordle"
                 target="_blank"
               >
-                <DonateIcon />
-                <div class="mr-3 text-black dark:text-white">Donate</div>
+                <PatreonIcon />
+                <div class="mr-3 text-black dark:text-white">Patreon</div>
               </a>
             </button>
           </div>
