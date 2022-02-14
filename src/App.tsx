@@ -1,11 +1,20 @@
 import { Route, Routes } from "solid-app-router";
-import { Component, createMemo, useContext } from "solid-js";
+import { Component, createEffect, createMemo, useContext } from "solid-js";
 import Game from "./Game";
 import { GamesDataContext } from "./GameDataProvider";
 import NotFound from "./NotFound";
 
 const App: Component = () => {
   const context = createMemo(() => useContext(GamesDataContext));
+
+  createEffect(() => {
+    if (context()?.[0].darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  });
+
   return context() ? (
     <Routes>
       <Route path="/" element={<Game mode="daily" />} />

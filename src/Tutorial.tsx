@@ -198,8 +198,8 @@ const Tutorial: Component<TutorialProps> = (props) => {
           >
             The Guardian
           </a>{" "}
-          and things exploded quickly from there. Now Quordle has over 60k
-          players daily and has had over 160k total players.
+          and things exploded quickly from there. Now Quordle has over 300k
+          players daily and has had over 850k total players.
           <br />
           <br />
           A shoutout to our friend that plays relentlessly while indoor cycling.

@@ -96,6 +96,7 @@ const Game: Component<GameProps> = (props) => {
       }}
     >
       <Header
+        mode={props.mode}
         onOpenTutorial={() => {
           vibrate();
           gtagWrap("event", "tutorial", {

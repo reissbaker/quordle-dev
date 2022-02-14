@@ -17,8 +17,9 @@ export type GameData = {
   currentStreak: number;
   maxStreak: number;
 };
-export type GamesData = { [key in GameMode]: GameData };
+export type GamesData = { [key in GameMode]: GameData } & { darkMode: boolean };
 export type GamesDataProviderFuncs = {
+  setDarkMode(darkMode: boolean): void;
   sendKey(mode: GameMode, e: KeyboardEvent): void;
   isGameComplete(mode: GameMode): boolean;
   addLetter(mode: GameMode, letter: string): void;

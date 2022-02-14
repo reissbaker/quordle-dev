@@ -132,7 +132,19 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
       currentStreak: 0,
       maxStreak: 0,
     },
+    darkMode: true,
   };
+  const osDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  try {
+    const darkMode = window.localStorage.getItem("dark_mode");
+    if (darkMode === null) {
+      gamesData.darkMode = osDarkMode;
+    } else {
+      gamesData.darkMode = darkMode === "true";
+    }
+  } catch (e) {
+    gamesData.darkMode = osDarkMode;
+  }
   (["daily", "free"] as GameMode[]).forEach((mode) => {
     let gameData: GameData;
     try {
@@ -213,6 +225,7 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
 
   createEffect(() => {
     try {
+      window.localStorage.setItem("dark_mode", String(state.darkMode));
       (["daily", "free"] as GameMode[]).forEach((mode) => {
         window.localStorage.setItem("last_" + mode, String(state[mode].seed));
         window.localStorage.setItem(
@@ -346,6 +359,13 @@ const GamesDataProvider: Component<GamesDataProviderProps> = (props) => {
   const store: [DeepReadonly<GamesData>, GamesDataProviderFuncs] = [
     state,
     {
+      setDarkMode(darkMode: boolean) {
+        setState(
+          produce((s) => {
+            s.darkMode = darkMode;
+          })
+        );
+      },
       sendKey(mode: GameMode, e: KeyboardEvent) {
         if (e.ctrlKey) return;
         if (e.key === "Backspace") {
