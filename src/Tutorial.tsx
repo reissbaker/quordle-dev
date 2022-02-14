@@ -1,6 +1,12 @@
 import { Component } from "solid-js";
 import { GameTileRenderer } from "./GameTile";
-import { FacebookIcon, GithubIcon, RedditIcon, TwitterIcon } from "./icons";
+import {
+  FacebookIcon,
+  GithubIcon,
+  InstagramIcon,
+  RedditIcon,
+  TwitterIcon,
+} from "./icons";
 import { BoxState } from "./types";
 
 type TutorialWordType = [string, BoxState[]];
@@ -150,6 +156,13 @@ const Tutorial: Component<TutorialProps> = (props) => {
             target="_blank"
           >
             <RedditIcon height={40} />
+          </a>
+          <a
+            class="px-4"
+            href="https://www.instagram.com/quordlegame/"
+            target="_blank"
+          >
+            <InstagramIcon height={40} />
           </a>
         </div>
         <div class="text-3xl my-4 text-center">History of Quordle</div>
