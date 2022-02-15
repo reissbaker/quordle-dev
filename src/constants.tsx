@@ -63,7 +63,7 @@ export const CAN_SHARE_IMAGE =
 export const CAN_COPY_CLIPBOARD =
   !!navigator.clipboard && !IS_IN_WEB_VIEW_ANDROID;
 
-export const BLACKLIST = ["gypsy", "mammy", "agora", "slave", "hussy"];
+export const BLACKLIST = ["gypsy", "gipsy", "mammy", "agora", "slave", "hussy"];
 export const BLACKLIST_SET = new Set(BLACKLIST);
 
 export const ANSWERS =
