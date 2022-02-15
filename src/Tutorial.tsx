@@ -33,6 +33,7 @@ const TutorialWord: Component<TutorialWordProps> = (props) => {
         gameRow={0}
         gameCol={i}
         rowTemporalState="past"
+        activeCol={0}
       />
     ));
 };

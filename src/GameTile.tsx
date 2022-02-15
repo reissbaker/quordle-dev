@@ -30,7 +30,9 @@ export const GameTileRenderer: Component<GameTileRendererProps> = (props) => {
         "text-black": props.state === "correct" || props.state === "diff",
         "text-rose-600": props.state === "invalid",
         "text-black dark:text-white": props.state === "none",
-        "quordle-heartbeat-anim": props.activeCol === props.gameCol && props.rowTemporalState === 'present',
+        "quordle-heartbeat-anim dark:quordle-heartbeat-anim-dark":
+          props.activeCol === props.gameCol &&
+          props.rowTemporalState === "present",
       }}
     >
       <div class="quordle-box-content" textContent={props.letter} />

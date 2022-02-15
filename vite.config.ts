@@ -4,8 +4,7 @@ import solidPlugin from 'vite-plugin-solid';
 export default defineConfig({
   plugins: [solidPlugin()],
   build: {
-    target: 'es2015',
-    sourcemap: true
+    target: 'es2015'
   },
   server: {
     host: true

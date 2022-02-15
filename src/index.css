@@ -23,14 +23,7 @@ code {
   background-repeat: no-repeat;
 }
 
-@keyframes color-fade {
-  from {
-    background-color: #ddd;
-  }
-  to {
-    background-color: #bbb;
-  }
-}
+
 
 @layer components {
   body {
@@ -59,11 +52,32 @@ code {
       @apply bg-gray-500;
     }
   }
-}
-
-.quordle-heartbeat-anim {
-  animation-name: color-fade;
-  animation-duration: 1100ms;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+  @keyframes color-fade {
+    from {
+      @apply bg-gray-300;
+    }
+    to {
+      @apply bg-gray-400;
+    }
+  }
+  @keyframes color-fade-dark {
+    from {
+      @apply bg-gray-600;
+    }
+    to {
+      @apply bg-gray-500;
+    }
+  }
+  .quordle-heartbeat-anim {
+    animation-name: color-fade;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+  .quordle-heartbeat-anim-dark {
+    animation-name: color-fade-dark;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
 }
