@@ -1,5 +1,43 @@
 import { Component, JSX } from "solid-js";
 
+export const LogoIcon: Component<
+  JSX.IntrinsicElements["svg"] & { colorblind: boolean }
+> = (props) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      width="24px"
+      height="24px"
+      {...props}
+    >
+      <rect x="0" y="0" width="12" height="12" fill="#919191" />
+      <rect
+        x="12"
+        y="0"
+        width="12"
+        height="12"
+        fill={props.colorblind ? "#60a5fa" : "#00cc88"}
+      />
+      <rect
+        x="0"
+        y="12"
+        width="12"
+        height="12"
+        fill={props.colorblind ? "#60a5fa" : "#00cc88"}
+      />
+      <rect
+        x="12"
+        y="12"
+        width="12"
+        height="12"
+        fill={props.colorblind ? "#fb923c" : "#ffcc00"}
+      />
+    </svg>
+  );
+};
+
 type TwitterIconProps = {
   height?: number;
 };

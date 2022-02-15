@@ -1,12 +1,12 @@
 import { NavLink } from "solid-app-router";
 import Dismiss from "solid-dismiss";
 import { Component, createSignal } from "solid-js";
-import favicon48 from "./assets/favicon-48.png";
 import { useGamesDataContext } from "./GameDataProvider";
 import {
   ChevronDownIcon,
   DonateIcon,
   HelpIcon,
+  LogoIcon,
   PatreonIcon,
   SettingsIcon,
   StatisticsIcon,
@@ -29,7 +29,7 @@ const Header: Component<HeaderProps> = (props) => {
   return (
     <nav class="bg-gray-300 dark:bg-gray-900 w-screen border-b-2 border-white dark:border-gray-800">
       <div class="flex items-center max-w-[550px] m-auto px-4 py-2 relative">
-        <img src={favicon48} width="24" height="24" />
+        <LogoIcon colorblind={gamesData.colorblind} />
         <span class="ml-3 text-black dark:text-white">Quordle</span>
         <div class="flex-1">
           <div class="">

@@ -24,7 +24,7 @@ const SettingToggle: Component<SettingToggleProps> = (props) => {
             onClick={props.onClick}
             onChange={props.onChange}
           />
-          <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+          <div class="block bg-gray-500 dark:bg-gray-600 w-14 h-8 rounded-full"></div>
           <div
             class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"
             classList={{
