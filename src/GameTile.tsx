@@ -12,6 +12,7 @@ type GameTileRendererProps = {
   state: GameTileState;
   letter: string;
   rowTemporalState: TemporalState;
+  activeCol: number;
 };
 export const GameTileRenderer: Component<GameTileRendererProps> = (props) => {
   return (
@@ -29,6 +30,7 @@ export const GameTileRenderer: Component<GameTileRendererProps> = (props) => {
         "text-black": props.state === "correct" || props.state === "diff",
         "text-rose-600": props.state === "invalid",
         "text-black dark:text-white": props.state === "none",
+        "quordle-heartbeat-anim": props.activeCol === props.gameCol && props.rowTemporalState === 'present',
       }}
     >
       <div class="quordle-box-content" textContent={props.letter} />
@@ -47,6 +49,12 @@ const GameTile: Component<GameTileProps> = (props) => {
   const gameIndex = props.gameX + props.gameY * NUM_GAMES_X;
 
   const [gamesData] = useGamesDataContext();
+
+  const activeCol = createMemo((): number => {
+    const gameData = gamesData[props.mode];
+    const current = gameData.current;
+    return current.length;
+  });
 
   const shouldRenderLetter = createMemo(() => {
     const gameData = gamesData[props.mode];
@@ -119,6 +127,7 @@ const GameTile: Component<GameTileProps> = (props) => {
       gameRow={props.gameRow}
       gameCol={props.gameCol}
       rowTemporalState={temporalState()}
+      activeCol={activeCol()}
     />
   );
 };

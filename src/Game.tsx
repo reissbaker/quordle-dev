@@ -40,7 +40,7 @@ type GameQuadrantProps = {
 };
 const GameQuadrant: Component<GameQuadrantProps> = (props) => {
   return (
-    <div class="flex flex-col flex-auto p-1">
+    <div class="flex flex-col flex-auto first:pl-1.5 last:pr-1.5 first:pr-0.5 last:pl-0.5">
       {GAME_ROWS_ARR.map((rowIndex) => (
         <div class="flex w-full">
           {GAME_COLS_ARR.map((colIndex) => (
@@ -135,7 +135,7 @@ const Game: Component<GameProps> = (props) => {
       >
         <div class="w-full flex-col">
           {NUM_GAMES_Y_ARR.map((gameY) => (
-            <div class="flex w-full">
+            <div class="flex w-full pt-1 last:pb-1">
               {NUM_GAMES_X_ARR.map((gameX) => (
                 <GameQuadrant mode={props.mode} gameX={gameX} gameY={gameY} />
               ))}
