@@ -14,10 +14,32 @@ import GameSquare from "./GameTile";
 import Header from "./Header";
 import Keyboard from "./Keyboard";
 import { createResizeObserverPoly } from "./ResizeObserverPoly";
+import Settings from "./Settings";
 import Statistics from "./Statistics";
 import Tutorial from "./Tutorial";
 import { GameMode } from "./types";
 import { gtagWrap, vibrate } from "./utils";
+
+type SubPageWrapperProps = {
+  open: boolean;
+  fontSize: number;
+};
+const SubPageWrapper: Component<SubPageWrapperProps> = (props) => {
+  return (
+    <div
+      class="absolute w-full h-full text-black dark:text-white bg-white dark:bg-gray-800 overflow-auto transition-all ease-in-out duration-500"
+      classList={{
+        "opacity-100 top-0": props.open,
+        "opacity-0 top-[100%]": !props.open,
+      }}
+      style={{
+        "font-size": props.fontSize + "px",
+      }}
+    >
+      {props.children}
+    </div>
+  );
+};
 
 /**
  * Create resize observer is a helper primitive for binding resize events.
@@ -78,6 +100,7 @@ const Game: Component<GameProps> = (props) => {
   const statisticsOpen = createMemo(
     () => searchParams.overlay === "statistics"
   );
+  const settingsOpen = createMemo(() => searchParams.overlay === "settings");
 
   const refCallback = createResizeObserverPoly({
     onResize: ({ width }) => {
@@ -98,18 +121,25 @@ const Game: Component<GameProps> = (props) => {
       <Header
         mode={props.mode}
         onOpenTutorial={() => {
-          vibrate();
+          vibrate(gamesData.vibration);
           gtagWrap("event", "tutorial", {
             mode: props.mode,
           });
           setSearchParams({ overlay: "tutorial" });
         }}
         onOpenStatistics={() => {
-          vibrate();
+          vibrate(gamesData.vibration);
           gtagWrap("event", "statistics", {
             mode: props.mode,
           });
           setSearchParams({ overlay: "statistics" });
+        }}
+        onOpenSettings={() => {
+          vibrate(gamesData.vibration);
+          gtagWrap("event", "settings", {
+            mode: props.mode,
+          });
+          setSearchParams({ overlay: "settings" });
         }}
       />
       <div
@@ -155,41 +185,31 @@ const Game: Component<GameProps> = (props) => {
           <Keyboard mode={props.mode} />
         )}
       </div>
-      <div
-        class="absolute w-full h-full text-black dark:text-white bg-white dark:bg-gray-800 overflow-auto transition-all ease-in-out duration-500"
-        classList={{
-          "opacity-100 top-0": statisticsOpen(),
-          "opacity-0 top-[100%]": !statisticsOpen(),
-        }}
-        style={{
-          "font-size": fontSize() + "px",
-        }}
-      >
+      <SubPageWrapper open={settingsOpen()} fontSize={fontSize()}>
+        <Settings
+          onCloseSettings={() => {
+            vibrate(gamesData.vibration);
+            setSearchParams({ overlay: undefined });
+          }}
+        />
+      </SubPageWrapper>
+      <SubPageWrapper open={statisticsOpen()} fontSize={fontSize()}>
         <Statistics
           mode={props.mode}
           onCloseStatistics={() => {
-            vibrate();
+            vibrate(gamesData.vibration);
             setSearchParams({ overlay: undefined });
           }}
         />
-      </div>
-      <div
-        class="absolute w-full h-full text-black dark:text-white bg-white dark:bg-gray-800 overflow-auto transition-all ease-in-out duration-500"
-        classList={{
-          "opacity-100 top-0": tutorialOpen(),
-          "opacity-0 top-[100%]": !tutorialOpen(),
-        }}
-        style={{
-          "font-size": fontSize() + "px",
-        }}
-      >
+      </SubPageWrapper>
+      <SubPageWrapper open={tutorialOpen()} fontSize={fontSize()}>
         <Tutorial
           onCloseTutorial={() => {
-            vibrate();
+            vibrate(gamesData.vibration);
             setSearchParams({ overlay: undefined });
           }}
         />
-      </div>
+      </SubPageWrapper>
     </div>
   );
 };

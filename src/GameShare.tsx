@@ -108,7 +108,7 @@ const GameShare: Component<GameShareProps> = (props) => {
         {CAN_SHARE_TEXT && (
           <ShareButton
             onClick={() => {
-              vibrate();
+              vibrate(gamesData.vibration);
               shareGame(props.mode, gamesData[props.mode], "share");
             }}
           >
@@ -124,7 +124,7 @@ const GameShare: Component<GameShareProps> = (props) => {
               type="button"
               class="ml-2 text-lg min-h-[50px] text-white bg-blue-800 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-l-lg px-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 border-r-[1px] border-gray-400"
               onClick={() => {
-                vibrate();
+                vibrate(gamesData.vibration);
                 shareGame(props.mode, gamesData[props.mode], "image");
               }}
             >
@@ -137,7 +137,7 @@ const GameShare: Component<GameShareProps> = (props) => {
               type="button"
               class="text-lg min-h-[50px] text-white bg-blue-800 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-r-lg px-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               onClick={() => {
-                vibrate();
+                vibrate(gamesData.vibration);
                 shareGame(props.mode, gamesData[props.mode], "image_save");
               }}
             >
@@ -148,7 +148,7 @@ const GameShare: Component<GameShareProps> = (props) => {
           <ShareButton
             class="ml-2"
             onClick={() => {
-              vibrate();
+              vibrate(gamesData.vibration);
               shareGame(props.mode, gamesData[props.mode], "image_save");
             }}
           >
@@ -163,7 +163,7 @@ const GameShare: Component<GameShareProps> = (props) => {
         <div class="flex items-center justify-center mt-2">
           <ShareButton
             onClick={() => {
-              vibrate();
+              vibrate(gamesData.vibration);
               gtagWrap("event", "share", {
                 mode: props.mode,
                 share_type: "clipboard",

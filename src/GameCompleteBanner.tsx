@@ -65,7 +65,7 @@ const GameCompleteBanner: Component<GameCompleteBannerProps> = (props) => {
       {props.mode === "free" ? (
         <NewGameButton
           onClick={() => {
-            vibrate();
+            vibrate(gamesData.vibration);
             gamesDataFuncs.resetFree();
           }}
         >

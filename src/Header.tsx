@@ -8,6 +8,7 @@ import {
   DonateIcon,
   HelpIcon,
   PatreonIcon,
+  SettingsIcon,
   StatisticsIcon,
 } from "./icons";
 import { GameMode } from "./types";
@@ -17,6 +18,7 @@ type HeaderProps = {
   mode: GameMode;
   onOpenTutorial: () => void;
   onOpenStatistics: () => void;
+  onOpenSettings: () => void;
 };
 const Header: Component<HeaderProps> = (props) => {
   const [gamesData, gamesDataFuncs] = useGamesDataContext();
@@ -36,7 +38,7 @@ const Header: Component<HeaderProps> = (props) => {
                 href="/"
                 activeClass="quordle-nav-active"
                 class="quordle-nav"
-                onClick={vibrate}
+                onClick={() => vibrate(gamesData.vibration)}
                 end
               >
                 Daily{/*#{dailySeed()}*/}
@@ -45,7 +47,7 @@ const Header: Component<HeaderProps> = (props) => {
                 href="/practice"
                 activeClass="quordle-nav-active"
                 class="quordle-nav"
-                onClick={vibrate}
+                onClick={() => vibrate(gamesData.vibration)}
                 end
               >
                 Practice
@@ -65,7 +67,7 @@ const Header: Component<HeaderProps> = (props) => {
             type="button"
             class="bg-gray-400 dark:bg-gray-800 p-1 rounded-full text-gray-700 hover:text-black dark:text-gray-400 dark:hover:text-white ml-2"
             ref={(ref) => setBtnEl(ref)}
-            onClick={() => vibrate()}
+            onClick={() => vibrate(gamesData.vibration)}
           >
             <ChevronDownIcon />
           </button>
@@ -77,33 +79,17 @@ const Header: Component<HeaderProps> = (props) => {
               top: (btnEl()?.getBoundingClientRect().bottom || 0) + 12 + "px",
             }}
           >
-            <div class="flex items-center justify-end m-4">
-              <label
-                for="toggleDarkMode"
-                class="flex items-center cursor-pointer"
-              >
-                <div class="relative">
-                  <input
-                    type="checkbox"
-                    id="toggleDarkMode"
-                    class="sr-only"
-                    checked={gamesData.darkMode}
-                    onClick={() => vibrate()}
-                    onChange={(e) =>
-                      gamesDataFuncs.setDarkMode(e.currentTarget.checked)
-                    }
-                  />
-                  <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
-                  <div
-                    class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"
-                    classList={{
-                      "translate-x-[100%] bg-emerald-500": gamesData.darkMode,
-                    }}
-                  ></div>
-                </div>
-                <div class="ml-3 text-black dark:text-white">Dark Mode</div>
-              </label>
-            </div>
+            <button
+              type="button"
+              class="flex flex-row-reverse items-center px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all my-4"
+              onClick={() => {
+                setOpen(false);
+                props.onOpenSettings();
+              }}
+            >
+              <SettingsIcon />
+              <div class="mr-3 text-black dark:text-white">Settings</div>
+            </button>
             <button
               type="button"
               class="flex flex-row-reverse items-center px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all mb-4"
@@ -121,7 +107,7 @@ const Header: Component<HeaderProps> = (props) => {
               type="button"
               class="px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all mb-4"
               onClick={() => {
-                vibrate();
+                vibrate(gamesData.vibration);
                 setOpen(false);
               }}
             >
@@ -138,7 +124,7 @@ const Header: Component<HeaderProps> = (props) => {
               type="button"
               class="px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all mb-4"
               onClick={() => {
-                vibrate();
+                vibrate(gamesData.vibration);
                 setOpen(false);
               }}
             >

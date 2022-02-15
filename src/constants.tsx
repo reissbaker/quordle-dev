@@ -26,6 +26,8 @@ export const KEYBOARD_KEYS = [
   ["bs", "Z", "X", "C", "V", "B", "N", "M", "enter1", "enter2"],
 ];
 
+export const CAN_VIBRATE = !!navigator.vibrate;
+
 export const IS_IOS =
   [
     "ipad simulator",

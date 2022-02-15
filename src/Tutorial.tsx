@@ -1,4 +1,5 @@
 import { Component } from "solid-js";
+import { useGamesDataContext } from "./GameDataProvider";
 import { GameTileRenderer } from "./GameTile";
 import {
   FacebookIcon,
@@ -22,6 +23,7 @@ const TUTORIAL_WORDS: TutorialWordType[] = [
 
 type TutorialWordProps = {
   word: TutorialWordType;
+  colorblind: boolean;
 };
 const TutorialWord: Component<TutorialWordProps> = (props) => {
   return props.word[0]
@@ -34,6 +36,7 @@ const TutorialWord: Component<TutorialWordProps> = (props) => {
         gameCol={i}
         rowTemporalState="past"
         activeCol={0}
+        colorblind={props.colorblind}
       />
     ));
 };
@@ -42,6 +45,8 @@ type TutorialProps = {
   onCloseTutorial: () => void;
 };
 const Tutorial: Component<TutorialProps> = (props) => {
+  const [gamesData, gamesDataFuncs] = useGamesDataContext();
+
   return (
     <div class="w-full h-full overflow-auto">
       <div class="max-w-[550px] w-full m-auto flex flex-row-reverse pr-4 pt-2">
@@ -77,19 +82,28 @@ const Tutorial: Component<TutorialProps> = (props) => {
         </div>
         <div class="text-3xl mt-4 mb-2">Examples</div>
         <div class="flex w-[50%] my-2">
-          <TutorialWord word={TUTORIAL_WORDS[0]} />
+          <TutorialWord
+            word={TUTORIAL_WORDS[0]}
+            colorblind={gamesData.colorblind}
+          />
         </div>
         <div class="text-base mb-6">
           The letter C is in the word and in the correct spot.
         </div>
         <div class="flex w-[50%] my-2">
-          <TutorialWord word={TUTORIAL_WORDS[1]} />
+          <TutorialWord
+            word={TUTORIAL_WORDS[1]}
+            colorblind={gamesData.colorblind}
+          />
         </div>
         <div class="text-base mb-6">
           The letter A is in the word but in the wrong spot.
         </div>
         <div class="flex w-[50%] my-2">
-          <TutorialWord word={TUTORIAL_WORDS[2]} />
+          <TutorialWord
+            word={TUTORIAL_WORDS[2]}
+            colorblind={gamesData.colorblind}
+          />
         </div>
         <div class="text-base mb-6">
           The letters C, O, M, F, Y are not in the word in any spot. When you
@@ -99,18 +113,30 @@ const Tutorial: Component<TutorialProps> = (props) => {
         </div>
         <div class="flex w-[100%] mb-2">
           <div class="flex w-[50%] mr-1">
-            <TutorialWord word={TUTORIAL_WORDS[3]} />
+            <TutorialWord
+              word={TUTORIAL_WORDS[3]}
+              colorblind={gamesData.colorblind}
+            />
           </div>
           <div class="flex w-[50%] ml-1">
-            <TutorialWord word={TUTORIAL_WORDS[4]} />
+            <TutorialWord
+              word={TUTORIAL_WORDS[4]}
+              colorblind={gamesData.colorblind}
+            />
           </div>
         </div>
         <div class="flex w-[100%] mt-2 mb-2">
           <div class="flex w-[50%] mr-1">
-            <TutorialWord word={TUTORIAL_WORDS[5]} />
+            <TutorialWord
+              word={TUTORIAL_WORDS[5]}
+              colorblind={gamesData.colorblind}
+            />
           </div>
           <div class="flex w-[50%] ml-1">
-            <TutorialWord word={TUTORIAL_WORDS[6]} />
+            <TutorialWord
+              word={TUTORIAL_WORDS[6]}
+              colorblind={gamesData.colorblind}
+            />
           </div>
         </div>
         <div class="text-base">For the guess WORLD:</div>

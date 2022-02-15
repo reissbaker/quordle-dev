@@ -1,4 +1,4 @@
-import { START_DATE, TimeUnits } from "./constants";
+import { CAN_VIBRATE, START_DATE, TimeUnits } from "./constants";
 import { RelativeTimeFormatUnit } from "./types";
 
 export const getCurrentDailySeed = () => {
@@ -22,8 +22,8 @@ export const gtagWrap = (
   }
 };
 
-export const vibrate = () => {
-  if (navigator.vibrate) {
+export const vibrate = (vibration: boolean) => {
+  if (CAN_VIBRATE && vibration) {
     navigator.vibrate(1);
   }
 };

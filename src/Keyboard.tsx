@@ -32,8 +32,8 @@ const Key: Component<KeyProps> = (props) => {
 
     const colorOptions: { [key in BoxState]: string } = {
       none: "#919191",
-      diff: "#ffcc00",
-      correct: "#00cc88",
+      diff: gamesData.colorblind ? "#fb923c" : "#ffcc00",
+      correct: gamesData.colorblind ? "#60a5fa" : "#00cc88",
     };
     const keyColors = [
       colorOptions.none,
@@ -87,7 +87,7 @@ const Key: Component<KeyProps> = (props) => {
       }}
       style={keyStyle()}
       onClick={() => {
-        vibrate();
+        vibrate(gamesData.vibration);
         gamesDataFuncs.sendKey(
           props.mode,
           new KeyboardEvent("keydown", {

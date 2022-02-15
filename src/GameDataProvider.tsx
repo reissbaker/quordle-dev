@@ -138,7 +138,10 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
       maxStreak: 0,
     },
     darkMode: true,
+    colorblind: false,
+    vibration: true,
   };
+
   const osDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
   try {
     const darkMode = window.localStorage.getItem("dark_mode");
@@ -150,6 +153,29 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
   } catch (e) {
     gamesData.darkMode = osDarkMode;
   }
+
+  try {
+    const colorblind = window.localStorage.getItem("colorblind");
+    if (colorblind === null) {
+      gamesData.colorblind = false;
+    } else {
+      gamesData.colorblind = colorblind === "true";
+    }
+  } catch (e) {
+    gamesData.colorblind = false;
+  }
+
+  try {
+    const vibration = window.localStorage.getItem("vibration");
+    if (vibration === null) {
+      gamesData.vibration = true;
+    } else {
+      gamesData.vibration = vibration === "true";
+    }
+  } catch (e) {
+    gamesData.vibration = true;
+  }
+
   (["daily", "free"] as GameMode[]).forEach((mode) => {
     let gameData: GameData;
     try {
@@ -231,6 +257,8 @@ function createLocalStore(): [Store<GamesData>, SetStoreFunction<GamesData>] {
   createEffect(() => {
     try {
       window.localStorage.setItem("dark_mode", String(state.darkMode));
+      window.localStorage.setItem("colorblind", String(state.colorblind));
+      window.localStorage.setItem("vibration", String(state.vibration));
       (["daily", "free"] as GameMode[]).forEach((mode) => {
         window.localStorage.setItem("last_" + mode, String(state[mode].seed));
         window.localStorage.setItem(
@@ -370,6 +398,20 @@ const GamesDataProvider: Component<GamesDataProviderProps> = (props) => {
         setState(
           produce((s) => {
             s.darkMode = darkMode;
+          })
+        );
+      },
+      setColorblind(colorblind: boolean) {
+        setState(
+          produce((s) => {
+            s.colorblind = colorblind;
+          })
+        );
+      },
+      setVibration(vibration: boolean) {
+        setState(
+          produce((s) => {
+            s.vibration = vibration;
           })
         );
       },

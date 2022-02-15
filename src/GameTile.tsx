@@ -13,14 +13,17 @@ type GameTileRendererProps = {
   letter: string;
   rowTemporalState: TemporalState;
   activeCol: number;
+  colorblind: boolean;
 };
 export const GameTileRenderer: Component<GameTileRendererProps> = (props) => {
   return (
     <div
       class="quordle-box w-[20%] pb-[calc(20%-0.25rem)]"
       classList={{
-        "bg-box-correct": props.state === "correct",
-        "bg-box-diff": props.state === "diff",
+        "bg-box-correct": props.state === "correct" && !props.colorblind,
+        "bg-box-correct-alt": props.state === "correct" && props.colorblind,
+        "bg-box-diff": props.state === "diff" && !props.colorblind,
+        "bg-box-diff-alt": props.state === "diff" && props.colorblind,
         "bg-gray-200 dark:bg-gray-700":
           props.state === "none" && props.rowTemporalState === "past",
         "bg-gray-300 dark:bg-gray-600": props.rowTemporalState === "present",
@@ -130,6 +133,7 @@ const GameTile: Component<GameTileProps> = (props) => {
       gameCol={props.gameCol}
       rowTemporalState={temporalState()}
       activeCol={activeCol()}
+      colorblind={gamesData.colorblind}
     />
   );
 };
