@@ -1,6 +1,7 @@
 import { Component, JSX } from "solid-js";
 import { CAN_VIBRATE } from "./constants";
 import { useGamesDataContext } from "./GameDataProvider";
+import { GameMode } from "./types";
 import { vibrate } from "./utils";
 
 type SettingToggleProps = {
@@ -41,6 +42,7 @@ const SettingToggle: Component<SettingToggleProps> = (props) => {
 };
 
 type SettingsProps = {
+  mode: GameMode;
   onCloseSettings: () => void;
 };
 const Settings: Component<SettingsProps> = (props) => {
@@ -106,6 +108,22 @@ const Settings: Component<SettingsProps> = (props) => {
             />
           )}
         </div>
+        {props.mode === "free" &&
+          gamesData.free.guesses.length > 0 &&
+          !gamesDataFuncs.isGameComplete(props.mode) && (
+            <div class="text-center mt-6">
+              <button
+                type="button"
+                class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                onClick={() => gamesDataFuncs.resetFree()}
+              >
+                Reset Current Practice
+              </button>
+              <div class="text-center text-base">
+                Warning: Resetting will count as a loss!
+              </div>
+            </div>
+          )}
       </div>
     </div>
   );

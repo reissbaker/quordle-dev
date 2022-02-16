@@ -187,6 +187,7 @@ const Game: Component<GameProps> = (props) => {
       </div>
       <SubPageWrapper open={settingsOpen()} fontSize={fontSize()}>
         <Settings
+          mode={props.mode}
           onCloseSettings={() => {
             vibrate(gamesData.vibration);
             setSearchParams({ overlay: undefined });

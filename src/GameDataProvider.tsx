@@ -452,6 +452,34 @@ const GamesDataProvider: Component<GamesDataProviderProps> = (props) => {
         const newSeed = new Date().getTime();
         setState(
           produce((s) => {
+            if (!isGameComplete("free")) {
+              const totalCorrect = s.free.answersCorrect.reduce(
+                (prev, correct) => (prev += correct >= 0 ? 1 : 0),
+                0
+              );
+              s.free.history[GAME_ROWS + totalCorrect]++;
+              if (s.free.currentStreak > 0) {
+                gtagWrap("event", "streak_reset", {
+                  mode: "free",
+                  daily_seed: undefined,
+                  current_streak: s.free.currentStreak,
+                  max_streak: s.free.maxStreak,
+                });
+              }
+              s.free.currentStreak = 0;
+              gtagWrap("event", "loss", {
+                mode: "free",
+                daily_seed: undefined,
+                guesses: s.free.guesses,
+                total_correct: totalCorrect,
+              });
+              gtagWrap("event", "reset", {
+                mode: "free",
+                daily_seed: undefined,
+                guesses: s.free.guesses,
+                total_correct: totalCorrect,
+              });
+            }
             s.free.seed = newSeed;
             s.free.guesses = [];
             s.free.answers = generateWordsFromSeed(newSeed);
