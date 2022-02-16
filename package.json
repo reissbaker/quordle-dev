@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "deploy-prod": "env-cmd -f ./.env vite build && echo www.quordle.com > dist/CNAME && gh-pages --dist dist --repo https://github.com/fireph/quordle.git --branch main --src **/!(*.js.map)"
+    "deploy-prod": "env-cmd -f ./.env vite build && echo www.quordle.com > dist/CNAME && gh-pages --dist dist --repo https://github.com/fireph/quordle.git --branch gh-pages --src **/!(*.js.map)"
   },
   "license": "MIT",
   "devDependencies": {
