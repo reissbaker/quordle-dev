@@ -1,6 +1,6 @@
 {
   "name": "quordle",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Put your skills to the test and solve four Wordles at once! You have 9 guesses to solve all four words. A new Quordle available each day to solve.",
   "scripts": {
     "start": "vite",
